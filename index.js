@@ -2,12 +2,15 @@
 
 var Crawler = require('./lib/crawler');
 var url = require('url');
+
 var config = require('./config');
 
-var c = new Crawler(config.crawler);
+console.log('Startup system: ' + config.global.name);
 
 var modulePath = require("path").join(__dirname, config.global.modulesDir);
-
 require("fs").readdirSync(modulePath).forEach(function(f) {
-  require('./' + config.global.modulesDir + '/' + f)(c);
+	if (f.match(/.+\.js/g) !== null) {
+		console.log('Loading module ' + f + '...')
+		require('./' + config.global.modulesDir + '/' + f)(Crawler, config);
+	}
 });
