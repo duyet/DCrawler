@@ -1,6 +1,6 @@
 'use stricts';
 
-var Crawler = require('crawler');
+var Crawler = require('./lib/crawler');
 var url = require('url');
 var config = require('./config');
 
