@@ -1,0 +1,26 @@
+{
+  "name": "Forum-Crawler",
+  "version": "1.0.0",
+  "description": "Forum Crawler using Nodejs, power by Van-Duyet Le <lvduit08@gmail.com>",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:lvduit/forum-crawler.git"
+  },
+  "keywords": [
+    "crawler",
+    "nodejs",
+    "uit",
+    "lvduit"
+  ],
+  "author": "lvduit",
+  "license": "ISC",
+  "dependencies": {
+    "crawler": "^0.4.3",
+    "url": "^0.10.3"
+  }
+}
