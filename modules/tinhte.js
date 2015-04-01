@@ -28,6 +28,13 @@ module.exports = function(Crawler, config) {
 				
 				FoundedLink.queue(link);
 
+				var fs = require('fs');
+				fs.appendFile("logs/tinhte.logs.txt", link + "\n", function(err) {
+					if(err) {
+						return console.log(err);
+					}
+				}); 
+
 				// Add that to Queue
 				console.log('Add to queue ', link);
 	        	c.queue(link);
@@ -53,4 +60,11 @@ var getQueueLink = function(regex, $, callback) {
 			}
 		});
 	}
+}
+
+var checkDeny = function(url) {
+	var regex = [
+		'tinhte.vn/search/',
+		'tinhte.vn/login/',
+	]; 
 }
