@@ -1,6 +1,7 @@
 'use strict';
 
 var helper = require('../lib/helper');
+var queue = require('../models/queue');
 
 var baseUrl = 'http://tinhte.vn';
 
@@ -16,13 +17,13 @@ module.exports = function(Crawler, config) {
 	config.callback = function (error, result, $) {
 
 		// Fetch next URL and Add to Queue
-		var fetchUrlFrom = [
+		var regex = [
 			'.PageNav > nav a', 
 			'#navigation a', 
 			'.primaryContent > h2.subHeading > a'
 		];
 
-		fetchUrlFrom.forEach(function(m) {
+		regex.forEach(function(m) {
 			getQueueLink(m, $, function(link) {
 				link = helper.getFullPath(baseUrl, link);
 				
@@ -38,13 +39,19 @@ module.exports = function(Crawler, config) {
 				// Add that to Queue
 				console.log('Add to queue ', link);
 	        	c.queue(link);
+
+	        	queue.queue(link, result.uri);
 	        });	
 		});
 	};
 
+	var startUrl = queue.dequeue();
+
+	console.log('Start url: ', startUrl);
+
 	// Start from root
-	var c = new Crawler(config);
-	c.queue(baseUrl);
+	//var c = new Crawler(config);
+	//c.queue(startUrl);
 }
 
 var getQueueLink = function(regex, $, callback) {
