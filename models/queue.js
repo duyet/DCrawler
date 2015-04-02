@@ -4,15 +4,15 @@ var mongoose = require('mongoose');
 var db = require('../config/db');
 var helper = require('../config/helper');
 
-var queue = db.model('Queue', mongoose.Schema({
+var QueueScheme = mongoose.Schema({
 	id: { type: String, index: {unique: true, dropDups: true} },
 	url: String, 
 	seen: { type: Boolean, default: false },
 	parent: { type: String, default: '' },
 	created: { type: Date, default: Date.now }
-}));
+});
 
-queue.addUrl = function(url, parent) {
+QueueScheme.statics.addUrl = function(url, parent) {
 	return new this({
 		id: helper.getUrlId(url), 
 		url: url, 
@@ -21,11 +21,11 @@ queue.addUrl = function(url, parent) {
 	}).save();
 }
 
-queue.findById = function(urlId) {
+QueueScheme.statics.findById = function(urlId) {
 	return this.find({id: urlId});
 }
 
-queue.findByParent = function(parentUrl) {
+QueueScheme.statics.findByParent = function(parentUrl) {
 	if (!helper.isUrlId(parentUrl)) {
 		parentUrl = helper.getUrlId(parentUrl);
 	}
@@ -33,20 +33,32 @@ queue.findByParent = function(parentUrl) {
 	return this.find({parent: parentUrl});
 }
 
-queue.findByUrl = function(name, cb) {
+QueueScheme.statics.findByUrl = function(name, cb) {
 	return this.find({ url: new RegExp(name, 'i') }, cb);
 }
 
-queue.findId = function(id, cb) {
+QueueScheme.statics.findId = function(id, cb) {
 	return this.find({ id: id }, cb);
 }
 
-queue.dequeue = function() {
-	return this.findOne({seen: false});
+QueueScheme.statics.dequeue = function() {
+	var url = '';
+	return this.findOne({seen: false}, function(err, link) {
+		if (!link) return false;
+
+		link.seen = true;
+		link.save();
+
+		url = link.url;
+	});
+
+	return url;
 }
 
-queue.queue = function(url, parent) {
+QueueScheme.statics.queue = function(url, parent) {
 	return this.addUrl(url, parent);
 }
+
+var queue = db.model('Queue', QueueScheme);
 
 module.exports = queue;
