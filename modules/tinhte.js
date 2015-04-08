@@ -1,5 +1,9 @@
 'use strict';
 
+var activeLogs = false;
+var numOfThread = 1000;
+var rootUrl = 'https://www.tinhte.vn/forums/';
+
 var helper = require('../lib/helper');
 var queue = require('../models/queue');
 
@@ -14,44 +18,98 @@ Array.prototype.queue = function (u) {
 var FoundedLink = new Array();
 																																												
 module.exports = function(Crawler, config) {
+	// =======================================================
+	// Config the callback
 	config.callback = function (error, result, $) {
-
 		// Fetch next URL and Add to Queue
 		var regex = [
 			'.PageNav > nav a', 
 			'#navigation a', 
-			'.primaryContent > h2.subHeading > a'
+			'.primaryContent > h2.subHeading > a',
+			'#content div > div.nodeText > h3 > a', // Sub forum
+			'.Tinhte_XenTag_WidgetRenderer_TrendingThreadTags > ul > li> a', // TinhTeTag
+			'#widget-tabs-Categorythreads div ul li a',
+			'.discussionListItems div.listBlock.main > div > h3 > a',
+			'#content > div > div > div.uix_contentFix > div > div > div:nth-child(4) > div.PageNav > nav > a',
+			'#container-21 > div > ul > li > div > a.PreviewTooltip', 
+			'h3.nodeTitle > a'
 		];
 
+		if (activeLogs) {
+			console.log(result);
+			require('fs').writeFile('logs/result.txt', JSON.stringify(result, null, 4), function(err) {
+				console.log(err);
+			});
+		}
+
+		var currentUrl = result.request.href;
+
 		regex.forEach(function(m) {
+			// Get links from result data
 			getQueueLink(m, $, function(link) {
-				link = helper.getFullPath(baseUrl, link);
-				
-				FoundedLink.queue(link);
+				// For each link parsed
 
-				var fs = require('fs');
-				fs.appendFile("logs/tinhte.logs.txt", link + "\n", function(err) {
-					if(err) {
-						return console.log(err);
-					}
-				}); 
+				link = helper.getFullPath(baseUrl, link); // Get full link URL
 
-				// Add that to Queue
-				console.log('Add to queue ', link);
-	        	c.queue(link);
+				if (activeLogs === true) {
+					require('fs').appendFile("logs/tinhte.logs.txt", link + "\n", function(err) {
+						if(err) {
+							return console.log(err);
+						}
+					}); 
+				}
 
-	        	queue.queue(link, result.uri);
+	        	//c.queue(link); // founded link with parent URL (currentUrl)
+	        	queue.queue(link, currentUrl, function(err) {
+	        		if (err) {
+	        			console.log(err.message);
+
+		        		require('fs').appendFile("logs/tinhte.logs.queue_error.txt", link + "\n", function(err) {
+							if(err) {
+								return console.log(err.message);
+							}
+						}); 
+	        		} else {
+	        			console.log('Added to queue ', link);
+
+	        			require('fs').appendFile("logs/tinhte.logs.queue_added.txt", link + "\n", function(err) {
+							if(err) {
+								return console.log('Added to queue ', link);
+							}
+						}); 
+	        		}
+	        	}); // queue on MongoDb
 	        });	
+		});
+
+		// Finish, reload
+		queue.dequeues(numOfThread, function(startUrl) {
+			if (startUrl === false) {
+				console.log('Stop now!!');
+				return process.exit(0);
+			}
+
+			c.queue(startUrl);
 		});
 	};
 
-	var startUrl = queue.dequeue();
+	// =======================================================
+	// Init Crawler system
+	var c = new Crawler(config);
 
-	console.log('Start url: ', startUrl);
+	// =======================================================
+	// Dequeue and start
+	queue.dequeue(function(startUrl) {
+		if (startUrl === false) {
+			startUrl = rootUrl;
+			queue.addUrl(startUrl);
+		}
+		
+		console.log('Start url -->  ', startUrl);
 
-	// Start from root
-	//var c = new Crawler(config);
-	//c.queue(startUrl);
+		// Add start url to queue
+		c.queue(startUrl);
+	});
 }
 
 var getQueueLink = function(regex, $, callback) {

@@ -1,10 +1,11 @@
 'use strict';
 
 var mongoose = require('mongoose');
+
 var db = require('../config/db');
 var helper = require('../config/helper');
 
-var QueueScheme = mongoose.Schema({
+var QueueScheme = new mongoose.Schema({
 	id: { type: String, index: {unique: true, dropDups: true} },
 	url: String, 
 	seen: { type: Boolean, default: false },
@@ -12,13 +13,15 @@ var QueueScheme = mongoose.Schema({
 	created: { type: Date, default: Date.now }
 });
 
-QueueScheme.statics.addUrl = function(url, parent) {
+QueueScheme.statics.addUrl = function(url, parent, callback) {
 	return new this({
 		id: helper.getUrlId(url), 
 		url: url, 
-		seen: 0,
+		seen: false,
 		parent: helper.getUrlId(parent)
-	}).save();
+	}).save(function(err) {
+		if (callback !== undefined) callback(err);
+	});
 }
 
 QueueScheme.statics.findById = function(urlId) {
@@ -41,22 +44,25 @@ QueueScheme.statics.findId = function(id, cb) {
 	return this.find({ id: id }, cb);
 }
 
-QueueScheme.statics.dequeue = function() {
-	var url = '';
-	return this.findOne({seen: false}, function(err, link) {
-		if (!link) return false;
+QueueScheme.statics.dequeue = function(next) {
+	this.findOne({seen: false}).limit(1).exec(function (err, link) {
+		if (!link) return next(false);
 
 		link.seen = true;
 		link.save();
 
-		url = link.url;
+		next(link.url);
 	});
-
-	return url;
 }
 
-QueueScheme.statics.queue = function(url, parent) {
-	return this.addUrl(url, parent);
+QueueScheme.statics.dequeues = function(num, next) {
+	for (var i = 0; i < num; i++) {
+		this.dequeue(next);
+	}
+}
+
+QueueScheme.statics.queue = function(url, parent, callback) {
+	return this.addUrl(url, parent, callback);
 }
 
 var queue = db.model('Queue', QueueScheme);
