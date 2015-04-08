@@ -2,12 +2,15 @@
 
 var activeLogs = false;
 var numOfThread = 1;
+var baseUrl = 'http://tinhte.vn';
 var rootUrl = 'https://www.tinhte.vn/forums/';
+
+var htmlToText = require('html-to-text');
 
 var helper = require('../lib/helper');
 var queue = require('../models/queue');
+var contents = require('../models/contents');
 
-var baseUrl = 'http://tinhte.vn';
 
 Array.prototype.queue = function (u) {
 	console.log(this.length +  '. Add ' + u + '...');
@@ -21,8 +24,31 @@ module.exports = function(Crawler, config) {
 	// =======================================================
 	// Config the callback
 	config.callback = function (error, result, $) {
+		var currentUrl = result.request.href;
+
+		// =====================================================
+		// Parse content
+		var posts = $('article .messageText');
+		if (posts.length > 0) {
+			posts.each(function(index, post) {
+				var postContent = $(post).text();
+				new contents({
+					url_id: helper.getUrlId(currentUrl),
+					url: currentUrl,
+					content: postContent
+				}).save(function(err) {
+					if (err) {
+						return console.log('Error when save tinhte post.', err);
+					}
+
+					
+				});
+			})
+		}
+
+		// =====================================================
 		// Fetch next URL and Add to Queue
-		var regex = [
+		var regexUrl = [
 			'.PageNav > nav a', 
 			'#navigation a', 
 			'.scrollable .items a', // paging from /forums/
@@ -43,9 +69,7 @@ module.exports = function(Crawler, config) {
 			});
 		}
 
-		var currentUrl = result.request.href;
-
-		regex.forEach(function(m) {
+		regexUrl.forEach(function(m) {
 			// Get links from result data
 			getQueueLink(m, $, function(link) {
 				// For each link parsed
@@ -59,7 +83,6 @@ module.exports = function(Crawler, config) {
 						}
 					}); 
 				}
-
 
 				if (helper.getUrlId(currentUrl) == 'tinhtevnforumsquangcaokhuyenmai230') {
 					console.log('---------------------------------------------------------------------------------');
