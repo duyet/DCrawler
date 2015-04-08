@@ -1,7 +1,7 @@
 'use strict';
 
 var activeLogs = false;
-var numOfThread = 1000;
+var numOfThread = 1;
 var rootUrl = 'https://www.tinhte.vn/forums/';
 
 var helper = require('../lib/helper');
@@ -25,6 +25,7 @@ module.exports = function(Crawler, config) {
 		var regex = [
 			'.PageNav > nav a', 
 			'#navigation a', 
+			'.scrollable .items a', // paging from /forums/
 			'.primaryContent > h2.subHeading > a',
 			'#content div > div.nodeText > h3 > a', // Sub forum
 			'.Tinhte_XenTag_WidgetRenderer_TrendingThreadTags > ul > li> a', // TinhTeTag
@@ -52,11 +53,18 @@ module.exports = function(Crawler, config) {
 				link = helper.getFullPath(baseUrl, link); // Get full link URL
 
 				if (activeLogs === true) {
-					require('fs').appendFile("logs/tinhte.logs.txt", link + "\n", function(err) {
+					require('fs').appendFile("logs/tinhte.logs.txt", helper.getUrlId(link) + "\t" + link + "\n", function(err) {
 						if(err) {
 							return console.log(err);
 						}
 					}); 
+				}
+
+
+				if (helper.getUrlId(currentUrl) == 'tinhtevnforumsquangcaokhuyenmai230') {
+					console.log('---------------------------------------------------------------------------------');
+					console.log('Child link of break point', link);
+					process.exit(0);
 				}
 
 	        	//c.queue(link); // founded link with parent URL (currentUrl)

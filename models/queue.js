@@ -3,10 +3,10 @@
 var mongoose = require('mongoose');
 
 var db = require('../config/db');
-var helper = require('../config/helper');
+var helper = require('../lib/helper');
 
 var QueueScheme = new mongoose.Schema({
-	id: { type: String, index: {unique: true, dropDups: true} },
+	id: { type: String, index: {unique: true} },
 	url: String, 
 	seen: { type: Boolean, default: false },
 	parent: { type: String, default: '' },
