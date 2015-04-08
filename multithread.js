@@ -1,9 +1,11 @@
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 
-var n = numCPUs * 3;
+var n = numCPUs * 1;
 
 if (cluster.isMaster) {
+	console.log('--> Your system have ' + numCPUs + ' CPU.');
+
   // Fork workers.
 	for (var i = 0; i < n; i++) {
 		cluster.fork();
