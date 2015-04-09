@@ -1,3 +1,5 @@
 node_modules/
+backup_data/
+logs/
 npm-debug.log
 *~
