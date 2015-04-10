@@ -34,7 +34,7 @@ module.exports = function(Crawler, config) {
 		var posts = $('article .messageText');
 		if (posts.length > 0) {
 			posts.each(function(index, post) {
-				var postContent = $(post).text();
+				var postContent = helper.makeContent($(post).text());
 				new contents({
 					url_id: mergeIdForTinhTeLink(currentUrl),
 					url: currentUrl,
