@@ -36,7 +36,7 @@ module.exports = function(Crawler, config) {
 			posts.each(function(index, post) {
 				var postContent = $(post).text();
 				new contents({
-					url_id: helper.getUrlId(currentUrl),
+					url_id: mergeIdForTinhTeLink(currentUrl),
 					url: currentUrl,
 					content: postContent
 				}).save(function(err) {
@@ -80,14 +80,14 @@ module.exports = function(Crawler, config) {
 				link = helper.getFullPath(baseUrl, link); // Get full link URL
 
 				if (activeLogs === true) {
-					require('fs').appendFile("logs/tinhte.logs.txt", helper.getUrlId(link) + "\t" + link + "\n", function(err) {
+					require('fs').appendFile("logs/tinhte.logs.txt", mergeIdForTinhTeLink(link) + "\t" + link + "\n", function(err) {
 						if(err) {
 							return console.log(err);
 						}
 					}); 
 				}
 
-				if (helper.getUrlId(currentUrl) == 'tinhtevnforumsquangcaokhuyenmai230') {
+				if (mergeIdForTinhTeLink(currentUrl) == 'tinhtevnforumsquangcaokhuyenmai230') {
 					console.log('---------------------------------------------------------------------------------');
 					console.log('Child link of break point', link);
 					process.exit(0);
@@ -166,4 +166,10 @@ var checkDeny = function(url) {
 		'tinhte.vn/search/',
 		'tinhte.vn/login/',
 	]; 
+}
+
+var mergeIdForTinhTeLink = function(url) {
+	var linkId = mergeIdForTinhTeLink(url);
+
+	return linkId.replace(/(page([0-9]+))$/g, '');
 }
