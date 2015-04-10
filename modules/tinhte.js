@@ -5,8 +5,6 @@ var numOfThread = 1;
 var baseUrl = 'http://tinhte.vn';
 var rootUrl = 'https://www.tinhte.vn/forums/';
 
-var htmlToText = require('html-to-text');
-
 var helper = require('../lib/helper');
 var queue = require('../models/queue');
 var contents = require('../models/contents');

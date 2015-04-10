@@ -37,6 +37,8 @@ Install Node modules
 
     npm install
 
+**Config your spider:**
+
 Config your spider, the sample spider is located at `modules/tinhte.js`
 
 **To run:**
