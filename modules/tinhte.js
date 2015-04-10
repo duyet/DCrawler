@@ -169,7 +169,7 @@ var checkDeny = function(url) {
 }
 
 var mergeIdForTinhTeLink = function(url) {
-	var linkId = mergeIdForTinhTeLink(url);
+	var linkId = helper.getUrlId(url);
 
-	return linkId.replace(/(page([0-9]+))$/g, '');
+	return linkId.replace(/(page([0-9]+))$/, '');
 }
