@@ -7,6 +7,8 @@ module.exports = {
 	cache: true, // Boolean, if true stores requests in memory
 	skipDuplicates: true, // Boolean, if true skips URIs that were already crawled, without even calling callback() 
 
+	proxies: [],
+
 	// This will be called for each crawled page 
 	callback : function (error, result, $) {
 		//$('a').each(function(index, a) {

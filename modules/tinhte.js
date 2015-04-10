@@ -24,6 +24,11 @@ module.exports = function(Crawler, config) {
 	// =======================================================
 	// Config the callback
 	config.callback = function (error, result, $) {
+		if (!result || !result.request) {
+			console.log('!!result');
+			return false;
+		}
+		
 		var currentUrl = result.request.href || '';
 
 		// =====================================================
