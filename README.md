@@ -3,6 +3,7 @@ DCrawler
 
 DCrawler is Nodejs Crawler, multi-module-spider, jQuery query page content, multi thread support.
 
+Version: 0.0.1-a
 
 Contact 
 =============
@@ -19,6 +20,7 @@ Current features:
 * Content parser like jQuery.
 * Multi-modules spider parse.
 * MongoDb Store
+* Queues stack on Database, you can stop and resume anytime.
 
 
 Usage
