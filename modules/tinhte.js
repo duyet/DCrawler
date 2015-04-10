@@ -24,7 +24,7 @@ module.exports = function(Crawler, config) {
 	// =======================================================
 	// Config the callback
 	config.callback = function (error, result, $) {
-		var currentUrl = result.request.href;
+		var currentUrl = result.request.href || '';
 
 		// =====================================================
 		// Parse content
