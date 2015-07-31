@@ -22,5 +22,5 @@ require("fs").readdirSync(modulePath).forEach(function(f) {
 	}
 });
 
-console.log('Finish!');
-process.exit(0);
+// console.log('Finish!');
+// process.exit(0);
