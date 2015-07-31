@@ -7,6 +7,7 @@ var helper = require('../lib/helper');
 
 var QueueScheme = new mongoose.Schema({
 	id: { type: String, index: {unique: true} },
+	queue_root_id: String,
 	url: String, 
 	seen: { type: Boolean, default: false },
 	parent: { type: String, default: '' },
