@@ -3,14 +3,14 @@ DCrawler
 
 DCrawler is Nodejs Crawler, multi-module-spider, jQuery query page content, multi thread support.
 
-Version: 0.0.1-a
+Version: 0.0.2
 
 Contact 
 =============
 
-Van-Duyet Le (lvduit08 at gmail.com)
+Van-Duyet Le (me[at]duyetdev.com)
 
-Home: http://lvduit.com
+Home: http://duyetdev.com
 
 Features
 --------
@@ -26,13 +26,13 @@ Current features:
 Usage
 -----
 
-Make sure your Nodejs and MongoDb are installed.
+Make sure you have installed the complete `Nodejs`, `npm` and `Mongodb`
 
 **To install:**
 
 Clone the script from Github
 
-    git clone https://github.com/lvduit/DCrawler.git
+    git clone https://github.com/duyetdev/DCrawler.git
     cd ./DCrawler
 
 Install Node modules
@@ -54,7 +54,7 @@ For multi thread base on your CPU Core
 
 **To view your data:**
 
-Using https://github.com/lvduit/mongo-express for GUI MongoDb Data view.
+Using https://github.com/duyetdev/mongo-express for GUI MongoDb Data view.
 
 
 License
