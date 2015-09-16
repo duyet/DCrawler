@@ -10,23 +10,23 @@ var queue = require('../models/queue');
 var contents = require('../models/contents');
 
 
-Array.prototype.queue = function (u) {
-	console.log(this.length +  '. Add ' + u + '...');
+Array.prototype.queue = function(u) {
+	console.log(this.length + '. Add ' + u + '...');
 	this.push(u);
 
 	return this;
 }
 var FoundedLink = new Array();
-																																												
+
 module.exports = function(Crawler, config) {
 	// =======================================================
 	// Config the callback
-	config.callback = function (error, result, $) {
+	config.callback = function(error, result, $) {
 		if (!result || !result.request) {
 			console.log('!!result');
 			return false;
 		}
-		
+
 		var currentUrl = result.request.href || '';
 
 		// =====================================================
@@ -44,7 +44,7 @@ module.exports = function(Crawler, config) {
 						return console.log('Error when save tinhte post.', err);
 					}
 
-					
+
 				});
 			})
 		}
@@ -52,8 +52,8 @@ module.exports = function(Crawler, config) {
 		// =====================================================
 		// Fetch next URL and Add to Queue
 		var regexUrl = [
-			'.PageNav > nav a', 
-			'#navigation a', 
+			'.PageNav > nav a',
+			'#navigation a',
 			'.scrollable .items a', // paging from /forums/
 			'.primaryContent > h2.subHeading > a',
 			'#content div > div.nodeText > h3 > a', // Sub forum
@@ -61,7 +61,7 @@ module.exports = function(Crawler, config) {
 			'#widget-tabs-Categorythreads div ul li a',
 			'.discussionListItems div.listBlock.main > div > h3 > a',
 			'#content > div > div > div.uix_contentFix > div > div > div:nth-child(4) > div.PageNav > nav > a',
-			'#container-21 > div > ul > li > div > a.PreviewTooltip', 
+			'#container-21 > div > ul > li > div > a.PreviewTooltip',
 			'h3.nodeTitle > a'
 		];
 
@@ -81,10 +81,10 @@ module.exports = function(Crawler, config) {
 
 				if (activeLogs === true) {
 					require('fs').appendFile("logs/tinhte.logs.txt", mergeIdForTinhTeLink(link) + "\t" + link + "\n", function(err) {
-						if(err) {
+						if (err) {
 							return console.log(err);
 						}
-					}); 
+					});
 				}
 
 				if (mergeIdForTinhTeLink(currentUrl) == 'tinhtevnforumsquangcaokhuyenmai230') {
@@ -93,27 +93,27 @@ module.exports = function(Crawler, config) {
 					process.exit(0);
 				}
 
-	        	//c.queue(link); // founded link with parent URL (currentUrl)
-	        	queue.queue(link, currentUrl, function(err) {
-	        		if (err) {
-	        			console.log(err.message);
+				//c.queue(link); // founded link with parent URL (currentUrl)
+				queue.queue(link, currentUrl, function(err) {
+					if (err) {
+						console.log(err.message);
 
-		        		require('fs').appendFile("logs/tinhte.logs.queue_error.txt", link + "\n", function(err) {
-							if(err) {
+						require('fs').appendFile("logs/tinhte.logs.queue_error.txt", link + "\n", function(err) {
+							if (err) {
 								return console.log(err.message);
 							}
-						}); 
-	        		} else {
-	        			console.log('Added to queue ', link);
+						});
+					} else {
+						console.log('Added to queue ', link);
 
-	        			require('fs').appendFile("logs/tinhte.logs.queue_added.txt", link + "\n", function(err) {
-							if(err) {
+						require('fs').appendFile("logs/tinhte.logs.queue_added.txt", link + "\n", function(err) {
+							if (err) {
 								return console.log('Added to queue ', link);
 							}
-						}); 
-	        		}
-	        	}); // queue on MongoDb
-	        });	
+						});
+					}
+				}); // queue on MongoDb
+			});
 		});
 
 		// Finish, reload
@@ -138,7 +138,7 @@ module.exports = function(Crawler, config) {
 			startUrl = rootUrl;
 			queue.addUrl(startUrl);
 		}
-		
+
 		console.log('Start url -->  ', startUrl);
 
 		// Add start url to queue
@@ -165,7 +165,7 @@ var checkDeny = function(url) {
 	var regex = [
 		'tinhte.vn/search/',
 		'tinhte.vn/login/',
-	]; 
+	];
 }
 
 var mergeIdForTinhTeLink = function(url) {
