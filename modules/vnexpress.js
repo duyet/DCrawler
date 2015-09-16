@@ -1,6 +1,7 @@
 'use strict';
 
 var format = require("string-template");
+var url = require('url');
 
 var activeLogs = false;
 var numOfThread = 1;
@@ -12,13 +13,15 @@ var queue = require('../models/queue');
 var contents = require('../models/contents');
 
 var FoundedLink = new Array();
+var postCouter = 0;
 
 // =====================
 var mainContentDom = '#left_calculator > div.fck_detail';
 var routerDom = [
 	'#menu_web a', // Main menu
 	'#breakumb_web a', // Sub navigation
-	'a.pagination_btn' // Pagination
+	'a.pagination_btn', // Pagination
+	'#news_home > li > div.title_news > a', // Posts
 ];
 
 module.exports = function(Crawler, config) {
@@ -27,7 +30,7 @@ module.exports = function(Crawler, config) {
 	config.callback = function(error, result, $) {
 		if (!result || !result.request) {
 			console.log('!!result');
-			return false;
+			//return false;
 		}
 
 		var currentUrl = result.request.href || '';
@@ -35,20 +38,32 @@ module.exports = function(Crawler, config) {
 		// =====================================================
 		// Parse content
 		var post = $(mainContentDom);
-		if (post.length) {
 
+		if (post.length) {
+			var parsedUrl = url.parse(result.request.href);
 			var _content = config.global.skipHtml ? $(post).text() : $(post).html();
 			var postContent = helper.makeContent(_content);
+			var postCategory = '';
 
-			console.log(postContent);
+			if (parsedUrl) {
+				var tmp = parsedUrl.pathname || '';
+				tmp = tmp.split('/');
+				tmp.pop;
+				tmp.map(function(i) {
+					if (i) postCategory += i;
+				});
+			}
 
 			new contents({
-				url_id: currentUrl,
+				url_id: helper.getUrlId(currentUrl),
 				url: currentUrl,
-				content: postContent
+				content: postContent,
+				category: postCategory
 			}).save(function(err) {
 				if (err) {
 					return console.log('Error when save tinhte post.', err);
+				} else {
+					console.log("Saved [" + postCouter++ + "]");
 				}
 			});
 
@@ -65,13 +80,13 @@ module.exports = function(Crawler, config) {
 					link = helper.resolveUrl(result.request.href, link);
 				}
 
-				queue.queue(link, currentUrl, function(err) {
-					if (err) {
-						//	console.log(err.message);
-					} else {
-						console.log('Added to queue ', link);
-					}
-				}); // queue on MongoDb
+				if (helper.isUrl(link)) {
+					queue.queue(link, currentUrl, function(err) {
+						if (!err) {
+							console.log('Added to queue ', link);
+						}
+					}); // queue on MongoDb	
+				}
 			});
 		});
 
@@ -82,7 +97,10 @@ module.exports = function(Crawler, config) {
 				return process.exit(0);
 			}
 
-			c.queue(startUrl);
+			// Add start url to queue
+			if (helper.isUrl(startUrl)) {
+				c.queue(startUrl);
+			}
 		});
 	};
 
@@ -98,10 +116,11 @@ module.exports = function(Crawler, config) {
 			queue.addUrl(startUrl);
 		}
 
-		console.log('Start url -->  ', startUrl);
-
 		// Add start url to queue
-		c.queue(startUrl);
+		if (helper.isUrl(startUrl)) {
+			console.log('Start url -->  ', startUrl);
+			c.queue(startUrl);
+		}
 	});
 }
 
