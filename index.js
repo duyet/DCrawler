@@ -3,8 +3,8 @@
 /**
  * Project: DCrawler
  * 
- * Build: 03/2015
- * Author: Van-Duyet Le <lvduit08@gmail.com>
+ * Date: 03/2015
+ * Author: Van-Duyet Le <me@duyetdev.com>
  */
 
 var Crawler = require('./lib/crawler');
@@ -21,6 +21,3 @@ require("fs").readdirSync(modulePath).forEach(function(f) {
 		require('./' + config.global.modulesDir + '/' + f)(Crawler, config);
 	}
 });
-
-// console.log('Finish!');
-// process.exit(0);

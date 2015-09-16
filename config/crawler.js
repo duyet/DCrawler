@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	maxConnections : 100,
+	maxConnections: 100,
 	jQuery: true,
 
 	cache: true, // Boolean, if true stores requests in memory
@@ -10,7 +10,7 @@ module.exports = {
 	proxies: [],
 
 	// This will be called for each crawled page 
-	callback : function (error, result, $) {
+	callback: function(error, result, $) {
 		//$('a').each(function(index, a) {
 		//	var toQueueUrl = $(a).attr('href');
 		//	c.queue(toQueueUrl);

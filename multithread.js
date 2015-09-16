@@ -8,7 +8,7 @@ var n = arg[0] || numCPUs * 1;
 if (cluster.isMaster) {
 	console.log('--> Your system have ' + numCPUs + ' CPU, running on ' + n + ' thread(s).');
 
-  // Fork workers.
+	// Fork workers.
 	for (var i = 0; i < n; i++) {
 		cluster.fork();
 	}
