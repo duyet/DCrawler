@@ -30,7 +30,7 @@ module.exports = function(Crawler, config) {
 	config.callback = function(error, result, $) {
 		if (!result || !result.request) {
 			console.log('!!result');
-			//return false;
+			return;
 		}
 
 		var currentUrl = result.request.href || '';

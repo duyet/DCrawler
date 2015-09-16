@@ -28,7 +28,7 @@ Usage
 
 Make sure you have installed the complete `Nodejs`, `npm` and `Mongodb`
 
-**To install:**
+### To install
 
 Clone the script from Github
 
@@ -39,20 +39,20 @@ Install Node modules
 
     npm install
 
-**Config your spider:**
+### Config your spider
 
 Config your spider, the sample spider is located at `modules/tinhte.js`
 
-**To run:**
+### To run
 
     node index
 
-For multi thread base on your CPU Core 
+For multi thread base on number of your CPU Core.
 
     node multithread
 
 
-**To view your data:**
+## To view your data
 
 Using https://github.com/duyetdev/mongo-express for GUI MongoDb Data view.
 
