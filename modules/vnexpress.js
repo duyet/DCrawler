@@ -55,7 +55,8 @@ module.exports = function(Crawler, config) {
 			if (parsedUrl) {
 				var tmp = parsedUrl.pathname || '';
 				tmp = tmp.split('/');
-				tmp.shift().pop();
+				tmp.shift();
+				tmp.pop();
 				tmp.map(function(i) {
 					if (i) postCategory += i + '/';
 				});
