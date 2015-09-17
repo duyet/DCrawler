@@ -9,7 +9,6 @@ var baseUrl = 'http://{subdomain}.vnexpress.net';
 var start = [
 	'http://vnexpress.net',
 	'http://giaitri.vnexpress.net',
-	'http://suckhoe.vnexpress.net',
 	'http://vnexpress.net/tin-tuc/khoa-hoc',
 	'http://vnexpress.net/tin-tuc/the-gioi',
 	'http://sohoa.vnexpress.net/'
@@ -28,8 +27,8 @@ var routerDom = [
 	//'#menu_web a', // Main menu
 	'#breakumb_web a', // Sub navigation
 	'a.pagination_btn', // Pagination
-	'#news_home > li > div.title_news > a', // Posts
 ];
+var postDom = '#news_home > li > div.title_news > a'; // Posts
 
 module.exports = function(Crawler, config) {
 	// =======================================================
@@ -77,6 +76,20 @@ module.exports = function(Crawler, config) {
 			});
 		}
 
+		getQueueLink(postDom, $, function(link) {
+			if (!helper.isUrl(link)) {
+				link = helper.resolveUrl(result.request.href, link);
+			}
+
+			if (helper.isUrl(link)) {
+				console.log('=>Added to queue ', link);
+				c.queue({
+					uri: link,
+					priority: 1
+				});
+			}
+		});
+
 		// =====================================================
 		// Fetch next URL and Add to Queue
 		routerDom.forEach(function(m) {
@@ -90,7 +103,10 @@ module.exports = function(Crawler, config) {
 
 				if (helper.isUrl(link)) {
 					console.log('Added to queue ', link);
-					c.queue(link);
+					c.queue({
+						uri: link,
+						priority: 9
+					});
 				}
 			});
 		});
