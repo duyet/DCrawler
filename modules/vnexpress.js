@@ -6,7 +6,14 @@ var url = require('url');
 var activeLogs = false;
 var numOfThread = 1;
 var baseUrl = 'http://{subdomain}.vnexpress.net';
-var start = 'http://vnexpress.net';
+var start = [
+	'http://vnexpress.net',
+	'http://giaitri.vnexpress.net',
+	'http://suckhoe.vnexpress.net',
+	'http://vnexpress.net/tin-tuc/khoa-hoc',
+	'http://vnexpress.net/tin-tuc/the-gioi',
+	'http://sohoa.vnexpress.net/'
+];
 
 var helper = require('../lib/helper');
 var queue = require('../models/queue');
@@ -18,7 +25,7 @@ var postCouter = 0;
 // =====================
 var mainContentDom = '#left_calculator > div.fck_detail';
 var routerDom = [
-	'#menu_web a', // Main menu
+	//'#menu_web a', // Main menu
 	'#breakumb_web a', // Sub navigation
 	'a.pagination_btn', // Pagination
 	'#news_home > li > div.title_news > a', // Posts
@@ -48,10 +55,11 @@ module.exports = function(Crawler, config) {
 			if (parsedUrl) {
 				var tmp = parsedUrl.pathname || '';
 				tmp = tmp.split('/');
-				tmp.pop;
+				tmp.shift().pop();
 				tmp.map(function(i) {
-					if (i) postCategory += i;
+					if (i) postCategory += i + '/';
 				});
+				postCategory = postCategory.substring(0, postCategory.length - 1);
 			}
 
 			new contents({
@@ -90,7 +98,8 @@ module.exports = function(Crawler, config) {
 	// =======================================================
 	// Init Crawler system
 	var c = new Crawler(config);
-	c.queue(start);
+	for (var i = 0; i < start.length; i++)
+		c.queue(start[i]);
 }
 
 var getQueueLink = function(regex, $, callback) {
