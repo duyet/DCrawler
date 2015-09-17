@@ -61,12 +61,11 @@ module.exports = function(Crawler, config) {
 				category: postCategory
 			}).save(function(err) {
 				if (err) {
-					return console.log('Error when save tinhte post.', err);
+					return console.log('Error when save post.', err);
 				} else {
 					console.log("Saved [" + postCouter++ + "]");
 				}
 			});
-
 		}
 
 		// =====================================================
@@ -81,47 +80,17 @@ module.exports = function(Crawler, config) {
 				}
 
 				if (helper.isUrl(link)) {
-					queue.queue(link, currentUrl, function(err) {
-						if (!err) {
-							console.log('Added to queue ', link);
-						}
-					}); // queue on MongoDb	
+					console.log('Added to queue ', link);
+					c.queue(link);
 				}
 			});
-		});
-
-		// Finish, reload
-		queue.dequeues(numOfThread, function(startUrl) {
-			if (startUrl === false) {
-				console.log('Stop now!!');
-				return process.exit(0);
-			}
-
-			// Add start url to queue
-			if (helper.isUrl(startUrl)) {
-				c.queue(startUrl);
-			}
 		});
 	};
 
 	// =======================================================
 	// Init Crawler system
 	var c = new Crawler(config);
-
-	// =======================================================
-	// Dequeue and start
-	queue.dequeue(function(startUrl) {
-		if (startUrl === false) {
-			startUrl = start;
-			queue.addUrl(startUrl);
-		}
-
-		// Add start url to queue
-		if (helper.isUrl(startUrl)) {
-			console.log('Start url -->  ', startUrl);
-			c.queue(startUrl);
-		}
-	});
+	c.queue(start);
 }
 
 var getQueueLink = function(regex, $, callback) {
