@@ -14,9 +14,11 @@ var ContentsScheme = new mongoose.Schema({
 		}
 	},
 	url: String,
-	title: String,
-	category: String,
-	content: String
+	product: String,
+	source: String,
+	text: String,
+	commentDate: Date,
+	crawlDate: Date
 });
 
 var content = db.model('Contents', ContentsScheme);

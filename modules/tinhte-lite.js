@@ -2,16 +2,17 @@
 
 var format = require("string-template");
 var url = require('url');
+var moment = require('moment');
 
 var activeLogs = false;
 var numOfThread = 1;
-var baseUrl = 'http://{subdomain}.vnexpress.net';
+var baseUrl = 'http://tinhte.vn';
+
+var product = 'redmi-note-2';
+var source = 'tinhte';
+
 var start = [
-	'http://vnexpress.net',
-	'http://giaitri.vnexpress.net',
-	'http://vnexpress.net/tin-tuc/khoa-hoc',
-	'http://vnexpress.net/tin-tuc/the-gioi',
-	'http://sohoa.vnexpress.net/'
+	'https://tinhte.vn/threads/tren-tay-xiaomi-redmi-note-2-4-trieu-co-man-hinh-5-5-full-hd-chip-tam-nhan-sac-nhanh.2500606'
 ];
 
 var helper = require('../lib/helper');
@@ -22,19 +23,19 @@ var FoundedLink = new Array();
 var postCouter = 0;
 
 // =====================
-var mainContentDom = '#left_calculator > div.fck_detail';
+var mainContentDom = 'div.messageInfo.primaryContent';
 
 var isFetchedRouter = false;
 var routerDom = [
-	'#menu_web a', // Main menu
-	'#breakumb_web a', // Sub navigation
+	// '#content > div > div > div.uix_contentFix > div > div > div:nth-child(6) > div.PageNav > nav > a', // Main menu
 ];
-var postDom = '#news_home > li > div.title_news > a'; // Posts
-var pagingDom = 'a.pagination_btn'; // Pagination
+var postDom = ''; // Posts
+var pagingDom = '#content > div > div > div.uix_contentFix > div > div > div:nth-child(6) > div.PageNav > nav > a'; // Main menu
 
 module.exports = function(Crawler, config) {
 	// =======================================================
 	// Config the callback
+	config.skipDuplicates = true;
 	config.callback = function(error, result, $) {
 		if (!result || !result.request) {
 			console.log('!!result');
@@ -45,56 +46,50 @@ module.exports = function(Crawler, config) {
 
 		// =====================================================
 		// Parse content
-		var post = $(mainContentDom);
+		var posts = $(mainContentDom);
 
-		if (post.length) {
-			var parsedUrl = url.parse(result.request.href);
-			var _content = config.global.skipHtml ? $(post).text() : $(post).html();
-			var postContent = helper.makeContent(_content);
-			var postCategory = '';
+		if (posts.length) {
+			posts.each(function(index, _post) {
+				var post = $(_post).children('div.messageContent > article > blockquote');
 
-			if (parsedUrl) {
-				var tmp = parsedUrl.pathname || '';
-				tmp = tmp.split('/');
-				tmp.shift();
-				tmp.pop();
-				tmp.map(function(i) {
-					if (i) postCategory += i + '/';
-				});
-				postCategory = postCategory.substring(0, postCategory.length - 1);
-			}
+				var parsedUrl = url.parse(result.request.href);
+				var _content = config.global.skipHtml ? $(post).text() : $(post).html();
+				var postContent = helper.makeContent(_content);
+				var postCategory = '';
+				var commentDate = moment("26/8/15 at 13:52", "DD/MM/YY [at] hh:mm");
 
-			new contents({
-				url_id: helper.getUrlId(currentUrl),
-				url: currentUrl,
-				content: postContent,
-				category: postCategory
-			}).save(function(err) {
-				if (err) {
-					return console.log('Error when save post.', err);
-				} else {
-					console.log("Saved [" + postCouter++ + "]");
+				if (parsedUrl) {
+					var tmp = parsedUrl.pathname || '';
+					tmp = tmp.split('/');
+					tmp.shift();
+					tmp.pop();
+					tmp.map(function(i) {
+						if (i) postCategory += i + '/';
+					});
+					postCategory = postCategory.substring(0, postCategory.length - 1);
 				}
-			});
-		}
 
-		getQueueLink(postDom, $, function(link) {
-			if (!helper.isUrl(link)) {
-				link = helper.resolveUrl(result.request.href, link);
-			}
-
-			if (helper.isUrl(link)) {
-				console.log('=>Added to queue ', link);
-				c.queue({
-					uri: link,
-					priority: 1
+				new contents({
+					url_id: helper.getUrlId(postContent.substr(1, 50)),
+					url: currentUrl,
+					product: product,
+					source: source,
+					text: postContent,
+					commentDate: commentDate,
+					crawlDate: new Date(),
+				}).save(function(err) {
+					if (err) {
+						return console.log('Error when save post.', err);
+					} else {
+						console.log("Saved [" + postCouter++ + "]");
+					}
 				});
-			}
-		});
+			})
+		}
 
 		getQueueLink(pagingDom, $, function(link) {
 			if (!helper.isUrl(link)) {
-				link = helper.resolveUrl(result.request.href, link);
+				link = helper.resolveUrl(baseUrl, link);
 			}
 
 			if (helper.isUrl(link)) {
