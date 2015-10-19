@@ -1,0 +1,7 @@
+{
+  "name": "DCrawler",
+  "description": "DCrawler UI",
+  "repository": "https://github.com/duyetdev/DCrawler",
+  "logo": "",
+  "keywords": ["node", "angular", "loopback", "admin", "api"]
+}

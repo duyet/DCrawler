@@ -1,0 +1,24 @@
+{
+  "name": "Post",
+  "plural": "posts",
+  "base": "AppModel",
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "string",
+      "meta": {
+        "formType": "textarea"
+      }
+    },
+    "image": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

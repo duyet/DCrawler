@@ -1,7 +1,6 @@
 {
   "db": {
-    "database": "DCrawler-010",
     "name": "db",
-    "connector": "mongodb"
+    "connector": "memory" 
   }
 }
