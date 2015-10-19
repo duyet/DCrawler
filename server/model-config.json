@@ -31,5 +31,9 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Queue": {
+    "dataSource": "db",
+    "public": true
   }
 }
