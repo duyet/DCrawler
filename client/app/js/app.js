@@ -41,7 +41,7 @@
       'com.module.core',
       'com.module.about',
       'com.module.browser',
-      'com.module.events',
+      'com.module.queues',
       'com.module.files',
       'com.module.notes',
       'com.module.pages',

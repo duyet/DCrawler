@@ -1,24 +1,24 @@
 (function () {
   'use strict';
   angular
-    .module('com.module.events')
-    .service('EventsService', function ($state, CoreService, Event, gettextCatalog) {
+    .module('com.module.queues')
+    .service('QueuesService', function ($state, CoreService, Queue, gettextCatalog) {
 
-      this.getEvents = function () {
-        return Event.find().$promise;
+      this.getQueues = function () {
+        return Queue.find().$promise;
       };
 
-      this.getEvent = function (id) {
-        return Event.findById({
+      this.getQueue = function (id) {
+        return Queue.findById({
           id: id
         }).$promise;
       };
 
-      this.upsertEvent = function (event) {
-        return Event.upsert(event).$promise
+      this.upsertQueue = function (event) {
+        return Queue.upsert(event).$promise
           .then(function () {
             CoreService.toastSuccess(
-              gettextCatalog.getString('Event saved'),
+              gettextCatalog.getString('Queue saved'),
               gettextCatalog.getString('Your event is safe with us!')
             );
           })
@@ -31,14 +31,14 @@
         );
       };
 
-      this.deleteEvent = function (id, successCb, cancelCb) {
+      this.deleteQueue = function (id, successCb, cancelCb) {
         CoreService.confirm(
           gettextCatalog.getString('Are you sure?'),
           gettextCatalog.getString('Deleting this cannot be undone'),
           function () {
-            Event.deleteById({id: id}, function () {
+            Queue.deleteById({id: id}, function () {
               CoreService.toastSuccess(
-                gettextCatalog.getString('Event deleted'),
+                gettextCatalog.getString('Queue deleted'),
                 gettextCatalog.getString('Your event is deleted!'));
               successCb();
             }, function (err) {
