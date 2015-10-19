@@ -1,7 +1,7 @@
 {
   "db": {
+    "database": "DCrawler-010",
     "name": "db",
-    "connector": "mongodb",
-    "database": "DCrawler-0.1.0" 
+    "connector": "mongodb"
   }
 }
