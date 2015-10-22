@@ -13,11 +13,11 @@ module.exports = function(app) {
     var settings = [{
       type: 'string',
       key: 'appName',
-      value: 'LoopBack Admin'
+      value: 'DCrawler'
     }, {
       type: 'select',
       key: 'appTheme',
-      value: 'skin-blue',
+      value: 'skin-black',
       options: [
         'skin-blue',
         'skin-black'
