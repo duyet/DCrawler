@@ -1,22 +1,19 @@
 {
-  "name": "Page",
-  "plural": "pages",
+  "name": "xxx",
   "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
   "properties": {
-    "id": {
+    "propertyName89": {
       "type": "string"
     },
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "slug": {
+    "propertyName95": {
       "type": "string"
     },
-    "content": {
-      "type": "string"
-    },
-    "extended": {
+    "propertyName65": {
       "type": "string"
     }
   },
