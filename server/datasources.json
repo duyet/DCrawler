@@ -1,7 +1,7 @@
 {
   "db": {
+    "url": "mongodb://localhost/dcrawler",
     "name": "db",
-    "connector": "mongodb",
-    "url": "mongodb://localhost/dcrawler"
+    "connector": "mongodb"
   }
 }
