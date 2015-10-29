@@ -62,7 +62,7 @@
     "dataSource": "db",
     "public": true
   },
-  "Event": {
+  "Queue": {
     "dataSource": "db",
     "public": true
   },
@@ -77,17 +77,5 @@
   "Meta": {
     "dataSource": "db",
     "public": true
-  },
-  "xxx": {
-    "dataSource": "db",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "gggg": {
-    "dataSource": "db",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
   }
 }
