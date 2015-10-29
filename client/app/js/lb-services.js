@@ -11447,13 +11447,13 @@ module.factory(
 
 /**
  * @ngdoc object
- * @name lbServices.Tagged-post
- * @header lbServices.Tagged-post
+ * @name lbServices.Taggedpost
+ * @header lbServices.Taggedpost
  * @object
  *
  * @description
  *
- * A $resource object for interacting with the `Tagged-post` model.
+ * A $resource object for interacting with the `Taggedpost` model.
  *
  * ## Example
  *
@@ -11463,7 +11463,7 @@ module.factory(
  *
  */
 module.factory(
-  "Tagged-post",
+  "Taggedpost",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
       urlBase + "/taggedpost/:id",
@@ -11472,8 +11472,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#create
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#create
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11500,7 +11500,7 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Tagged-post` object.)
+         * This usually means the response is a `Taggedpost` object.)
          * </em>
          */
         "create": {
@@ -11510,8 +11510,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#createMany
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#createMany
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11538,7 +11538,7 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Tagged-post` object.)
+         * This usually means the response is a `Taggedpost` object.)
          * </em>
          */
         "createMany": {
@@ -11549,8 +11549,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#upsert
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#upsert
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11577,7 +11577,7 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Tagged-post` object.)
+         * This usually means the response is a `Taggedpost` object.)
          * </em>
          */
         "upsert": {
@@ -11587,8 +11587,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#exists
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#exists
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11619,8 +11619,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#findById
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#findById
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11644,7 +11644,7 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Tagged-post` object.)
+         * This usually means the response is a `Taggedpost` object.)
          * </em>
          */
         "findById": {
@@ -11654,8 +11654,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#find
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#find
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11677,7 +11677,7 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Tagged-post` object.)
+         * This usually means the response is a `Taggedpost` object.)
          * </em>
          */
         "find": {
@@ -11688,8 +11688,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#findOne
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#findOne
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11711,7 +11711,7 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Tagged-post` object.)
+         * This usually means the response is a `Taggedpost` object.)
          * </em>
          */
         "findOne": {
@@ -11721,8 +11721,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#updateAll
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#updateAll
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11755,8 +11755,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#deleteById
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#deleteById
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11785,8 +11785,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#count
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#count
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11817,8 +11817,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#prototype$updateAttributes
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#prototype$updateAttributes
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11844,7 +11844,7 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Tagged-post` object.)
+         * This usually means the response is a `Taggedpost` object.)
          * </em>
          */
         "prototype$updateAttributes": {
@@ -11854,8 +11854,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#createChangeStream
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#createChangeStream
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11895,8 +11895,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#updateOrCreate
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#updateOrCreate
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11923,15 +11923,15 @@ module.factory(
          *
          * <em>
          * (The remote method definition does not provide any description.
-         * This usually means the response is a `Tagged-post` object.)
+         * This usually means the response is a `Taggedpost` object.)
          * </em>
          */
         R["updateOrCreate"] = R["upsert"];
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#update
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#update
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11961,8 +11961,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#destroyById
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#destroyById
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -11988,8 +11988,8 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Tagged-post#removeById
-         * @methodOf lbServices.Tagged-post
+         * @name lbServices.Taggedpost#removeById
+         * @methodOf lbServices.Taggedpost
          *
          * @description
          *
@@ -12016,13 +12016,13 @@ module.factory(
 
     /**
     * @ngdoc property
-    * @name lbServices.Tagged-post#modelName
-    * @propertyOf lbServices.Tagged-post
+    * @name lbServices.Taggedpost#modelName
+    * @propertyOf lbServices.Taggedpost
     * @description
     * The name of the model represented by this $resource,
-    * i.e. `Tagged-post`.
+    * i.e. `Taggedpost`.
     */
-    R.modelName = "Tagged-post";
+    R.modelName = "Taggedpost";
 
 
     return R;
