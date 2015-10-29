@@ -1,3 +1,9 @@
-module.exports = function(Queue) {
+'use strict';
+
+module.exports = function (Queue) {
+
+  Queue.createFakeData = function (faker) {
+
+  }
 
 };

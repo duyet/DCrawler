@@ -5,7 +5,7 @@
     .service('FakeService', function ($window) {
       this.faker = $window.faker;
     })
-    .controller('SandboxFakerCtrl', function ($scope, $window, CoreService, FakeService, Event, Post, User, Page, Note) {
+    .controller('SandboxFakerCtrl', function ($scope, $window, CoreService, FakeService, Queue, Post, User, Page, Note) {
       $scope.faker = [];
 
       $scope.records = 10;
@@ -78,7 +78,7 @@
             endDate: FakeService.faker.date.future()
           };
           $scope.faker.push(fake);
-          Event.create(fake);
+          Queue.create(fake);
         }
       };
 
