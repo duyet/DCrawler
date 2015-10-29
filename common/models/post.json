@@ -3,18 +3,31 @@
   "plural": "posts",
   "base": "AppModel",
   "properties": {
-    "title": {
+    "url": {
       "type": "string",
       "required": true
     },
+    "title": {
+      "type": "string"
+    },
+    "product": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "commentDate": {
+      "type": "date"
+    },
+    "crawlDate": {
+      "type": "date"
+    },
     "content": {
       "type": "string",
+      "required": true,
       "meta": {
         "formType": "textarea"
       }
-    },
-    "image": {
-      "type": "string"
     }
   },
   "validations": [],
