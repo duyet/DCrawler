@@ -2,7 +2,7 @@
 <html ng-app="loopbackApp" ng-controller="LayoutCtrl">
 <head>
   <meta charset="utf-8">
-  <title>Admin: {{ getSetting('appName') }}</title>
+  <title data-ng-bind="getSetting('appName')">Admin</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -148,10 +148,6 @@
 <script src="/modules/core/services/api.service.js"></script>
 <script src="/modules/core/services/core.service.js"></script>
 <script src="/modules/core/services/meta.service.js"></script>
-<script src="/modules/events/app.events.js"></script>
-<script src="/modules/events/config/events.config.js"></script>
-<script src="/modules/events/config/events.routes.js"></script>
-<script src="/modules/events/services/events.service.js"></script>
 <script src="/modules/files/app.files.js"></script>
 <script src="/modules/files/config/file.config.js"></script>
 <script src="/modules/files/config/file.routes.js"></script>
@@ -173,6 +169,10 @@
 <script src="/modules/products/config/products.routes.js"></script>
 <script src="/modules/products/services/categories.service.js"></script>
 <script src="/modules/products/services/products.service.js"></script>
+<script src="/modules/queues/app.queues.js"></script>
+<script src="/modules/queues/config/queues.config.js"></script>
+<script src="/modules/queues/config/queues.routes.js"></script>
+<script src="/modules/queues/services/queues.service.js"></script>
 <script src="/modules/sandbox/app.sandbox.js"></script>
 <script src="/modules/sandbox/config/sandbox.config.js"></script>
 <script src="/modules/sandbox/config/sandbox.routes.js"></script>
