@@ -1,5 +1,5 @@
 {
-  "name": "Post",
+  "name": "Post", 
   "plural": "posts",
   "base": "AppModel",
   "properties": {
@@ -28,6 +28,14 @@
       "meta": {
         "formType": "textarea"
       }
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "default": "none"
+    },
+    "taggedUser": {
+      "type": "string"
     }
   },
   "validations": [],
