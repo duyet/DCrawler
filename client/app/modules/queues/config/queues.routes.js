@@ -97,7 +97,7 @@
 					url: '/status',
 					templateUrl: 'modules/queues/views/status.html',
 					controllerAs: 'ctrl',
-					controller: function($state, QueuesService, queue) {
+					controller: function($state) {
 
 					},
 					resolve: {
