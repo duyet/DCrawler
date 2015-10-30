@@ -2,26 +2,26 @@
   'use strict';
   angular
     .module('com.module.tagged')
-    .service('TaggedPostsService', function (CoreService, Post, gettextCatalog) {
-      this.getPosts = function () {
-        return Post.find({
+    .service('TaggedpostsService', function (CoreService, Taggedpost, gettextCatalog) {
+      this.getTaggedposts = function () {
+        return Taggedpost.find({
           filter: {
             order: 'created DESC'
           }
         }).$promise;
       };
 
-      this.getPost = function (id) {
-        return Post.findById({
+      this.getTaggedpost = function (id) {
+        return Taggedpost.findById({
           id: id
         }).$promise;
       };
 
-      this.upsertPost = function (post) {
-        return Post.upsert(post).$promise
+      this.upsertTaggedpost = function (post) {
+        return Taggedpost.upsert(post).$promise
           .then(function () {
             CoreService.toastSuccess(
-              gettextCatalog.getString('Post saved'),
+              gettextCatalog.getString('Taggedpost saved'),
               gettextCatalog.getString('Your post is safe with us!')
             );
           })
@@ -34,14 +34,14 @@
         );
       };
 
-      this.deletePost = function (id, successCb, cancelCb) {
+      this.deleteTaggedpost = function (id, successCb, cancelCb) {
         CoreService.confirm(
           gettextCatalog.getString('Are you sure?'),
           gettextCatalog.getString('Deleting this cannot be undone'),
           function () {
-            Post.deleteById({id: id}, function () {
+            Taggedpost.deleteById({id: id}, function () {
               CoreService.toastSuccess(
-                gettextCatalog.getString('Post deleted'),
+                gettextCatalog.getString('Taggedpost deleted'),
                 gettextCatalog.getString('Your post is deleted!'));
               successCb();
             }, function (err) {
