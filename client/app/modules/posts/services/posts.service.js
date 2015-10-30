@@ -60,11 +60,18 @@
       this.getFormFields = function () {
         return [
           {
+            key: 'url',
+            type: 'input',
+            templateOptions: {
+              label: gettextCatalog.getString('URL'),
+              required: true
+            }
+          },
+          {
             key: 'title',
             type: 'input',
             templateOptions: {
-              label: gettextCatalog.getString('Title'),
-              required: true
+              label: gettextCatalog.getString('title')
             }
           },
           {
@@ -76,12 +83,33 @@
             }
           },
           {
-            key: 'image',
+            key: 'product',
             type: 'input',
             templateOptions: {
-              label: gettextCatalog.getString('Image')
+              label: gettextCatalog.getString('product')
             }
-          }
+          },
+          {
+            key: 'source',
+            type: 'input',
+            templateOptions: {
+              label: gettextCatalog.getString('source')
+            }
+          },
+          {
+            key: 'commentDate',
+            type: 'datepicker',
+            templateOptions: {
+              label: gettextCatalog.getString('commentDate')
+            }
+          },
+          {
+            key: 'crawlDate',
+            type: 'datepicker',
+            templateOptions: {
+              label: gettextCatalog.getString('crawlDate')
+            }
+          },
         ];
       };
 
