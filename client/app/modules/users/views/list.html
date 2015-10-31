@@ -2,7 +2,7 @@
   <div class="panel-heading">
     Users
     <span class="pull-right btn-group">
-      <a href="" class="btn btn-xs btn-success" ui-sref="^.add()">
+      <a href="" class="btn btn-success" ui-sref="^.add()">
         <i class="fa fa-plus"></i>
       </a>
     </span>
@@ -11,13 +11,13 @@
   <div class='list-group'>
     <div ng-repeat="user in ctrl.users" class="list-group-item">
       <span class="pull-right btn-group">
-        <a class="btn btn-xs btn-default" ui-sref="app.users.password({ id: user.id })">
+        <a class="btn btn-default" ui-sref="app.users.password({ id: user.id })">
           <i class="fa fa-key"></i>
         </a>
-        <a class="btn btn-xs btn-default" ui-sref="app.users.edit({ id: user.id })">
+        <a class="btn btn-default" ui-sref="app.users.edit({ id: user.id })">
           <i class="fa fa-pencil"></i>
         </a>
-        <a class="btn btn-xs btn-danger" ui-sref="app.users.delete({ id: user.id })">
+        <a class="btn btn-danger" ui-sref="app.users.delete({ id: user.id })">
           <i class="fa fa-trash-o"></i>
         </a>
       </span>

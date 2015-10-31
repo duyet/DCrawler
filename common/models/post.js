@@ -22,7 +22,10 @@ module.exports = function (Post) {
 		var limit = limit || 50;
 		var skip = page * limit;
 
-		return Post.find({label: "none"}, { skip: skip, limit: limit });
+		Post.find({label: "none"}, { skip: skip, limit: limit }, function(err, data) {
+			console.log(err, data);
+			cb(err, data)
+		});
 	}
 
 	Post.getRawPost = function(page, limit) {
