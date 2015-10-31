@@ -49,3 +49,7 @@
 .nav-tabs > li > a, .nav-tabs > li > a:hover {
   cursor: pointer;
 }
+
+.list-group-item.have-label {
+  border-left: 3px solid #035A0E;
+}

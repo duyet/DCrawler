@@ -13,8 +13,14 @@
                     url: '',
                     templateUrl: 'modules/posts/views/list.html',
                     controllerAs: 'ctrl',
-                    controller: function(posts) {
+                    controller: function(posts, PostsService) {
                         this.posts = posts;
+
+                        this.setLabel = function(post, label) {
+                            post.label = label;
+                            console.log("Assign " + label + " for ", post);
+                            PostsService.upsertPost(post);
+                        }
                     },
                     resolve: {
                         posts: [

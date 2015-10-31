@@ -46,9 +46,14 @@ module.exports = function(app) {
       type: 'boolean',
       key: 'com.module.users.enable_registration',
       value: true
+    }, {
+      type: 'array',
+      key: 'labelList',
+      value: ['none', 'pos', 'neg', 'neu']
     }];
 
     settings.forEach(function(setting) {
+      console.log("Loading setting: ", setting.key);
       Setting.create(setting, function(err) {
         if (err) {
           console.error(err);
@@ -70,6 +75,11 @@ module.exports = function(app) {
     if (err) {
       console.error(err);
     }
+
+    Setting.destroyAll(function() {
+      loadDefaultSettings();
+    })
+
     if (result < 1) {
       loadDefaultSettings();
     } else {
