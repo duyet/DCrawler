@@ -1,0 +1,23 @@
+{
+  "name": "Pm2",
+  "plural": "pm2",
+  "base": "PersistedModel",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "uptime": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "script": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
