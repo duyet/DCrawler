@@ -50,6 +50,7 @@
       //'com.module.products',
       //'com.module.sandbox',
       'com.module.settings',
+      'com.module.crawlsettings',
       'com.module.users'
     ])
     .run(function ($rootScope, $cookies, gettextCatalog) {

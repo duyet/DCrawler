@@ -81,5 +81,13 @@
   "tagged-post": {
     "dataSource": "db",
     "public": true
+  },
+  "crawlSetting": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Pm2": {
+    "dataSource": "db",
+    "public": true
   }
 }
