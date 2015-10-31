@@ -15,11 +15,15 @@
                     controllerAs: 'ctrl',
                     controller: function(posts, PostsService) {
                         this.posts = posts;
+                        this.autohidepost = true;
 
                         this.setLabel = function(post, label) {
                             post.label = label;
                             console.log("Assign " + label + " for ", post);
-                            PostsService.upsertPost(post);
+                            PostsService.setLabel(post);
+                            if (this.autohidepost == true) {
+                                // Hide
+                            }
                         }
                     },
                     resolve: {
