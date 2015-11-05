@@ -47,6 +47,7 @@
       //'com.module.pages',
       'com.module.posts',
       'com.module.tagged',
+      'com.module.eventserver',
       //'com.module.products',
       //'com.module.sandbox',
       'com.module.settings',

@@ -36,6 +36,7 @@ module.exports = function (grunt) {
 
     // Project settings
     yeoman: appConfig,
+    dcrawler: require('./server/config.json') || {},
 
     // Watches files for changes and runs tasks based on the changed files
     nggettext_extract: {
@@ -116,6 +117,11 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n {%= __ngModule %}',
         name: 'config'
       },
+      constants: {
+          ENV: {
+            res: 'xxx'
+          }
+        },
       // Environment targets
       development: {
         options: {
@@ -125,7 +131,8 @@ module.exports = function (grunt) {
           ENV: {
             name: 'development',
             apiUrl: '<%= yeoman.api.development %>',
-            siteUrl: '<%= yeoman.site.development %>'
+            siteUrl: '<%= yeoman.site.development %>',
+            serverConfig: '<%= dcrawler %>',
           }
         }
       },
@@ -137,7 +144,8 @@ module.exports = function (grunt) {
           ENV: {
             name: 'production',
             apiUrl: '<%= yeoman.api.production %>',
-            siteUrl: '<%= yeoman.site.production %>'
+            siteUrl: '<%= yeoman.site.production %>',
+            serverConfig: '<%= dcrawler %>',
           }
         }
       }
