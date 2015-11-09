@@ -31,6 +31,7 @@
           property: 'email',
           placeholder: gettextCatalog.getString('Email'),
           type: 'email',
+          default: 'lvduit08@gmail.com',
           attr: {
             required: true,
             ngMinlength: 4
@@ -46,6 +47,7 @@
           property: 'password',
           placeholder: gettextCatalog.getString('Password'),
           type: 'password',
+          default: '123456',
           attr: {
             required: true
           }
