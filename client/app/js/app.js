@@ -52,6 +52,7 @@
       //'com.module.sandbox',
       'com.module.settings',
       'com.module.crawlsettings',
+      'com.module.testzone',
       'com.module.users'
     ])
     .run(function ($rootScope, $cookies, gettextCatalog) {
