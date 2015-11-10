@@ -7,7 +7,11 @@
         .state('app.crawlsettings', {
           abstract: true,
           url: '/crawlsettings',
-          templateUrl: 'modules/crawlsettings/views/main.html'
+          templateUrl: 'modules/crawlsettings/views/main.html',
+          controllerAs: 'ctrl',
+          controller: function($rootScope) {
+            this.box = $rootScope.dashboardBox;
+          }
         })
         .state('app.crawlsettings.list', {
           url: '',

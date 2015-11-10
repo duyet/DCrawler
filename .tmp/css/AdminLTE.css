@@ -2166,7 +2166,6 @@ Component: timeline
 */
 /* ADD THIS CLASS TO THE <HTML> TAG */
 .lockscreen {
-  background: url(../images/blur-background09.jpg) repeat center center fixed;
   background-size: cover;
 }
 /* Remove the background from the body element */
