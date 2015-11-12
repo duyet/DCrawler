@@ -11,5 +11,5 @@ module.exports = {
 
 	// Module Ignore will not run
 	// Ex. ['tinhte.js']
-	ignoreModule: ['tinhte.js'],
+	ignoreModule: [],
 };

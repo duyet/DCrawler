@@ -148,7 +148,7 @@ Crawler.prototype._inject = function _inject(response, options, callback) {
         callback(null, $);
     } else if (options.jQuery.jsdom) {
         var jsdom = options.jQuery.jsdom;
-        var scriptLocation = path.resolve(__dirname, '../vendor/jquery-2.1.1.min.js');
+        var scriptLocation = path.resolve(__dirname, '../node_modules/jquery/dist/jquery.min.js');
 
         //Use promises
         readJqueryUrl(scriptLocation, function(err, jquery) {
