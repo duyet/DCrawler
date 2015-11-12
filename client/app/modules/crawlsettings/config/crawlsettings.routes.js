@@ -46,6 +46,57 @@
             }
           }
         })
+        .state('app.crawlsettings.launch', {
+          url: '/launch',
+          templateUrl: 'modules/crawlsettings/views/launch.html',
+          controllerAs: 'ctrl',
+          controller: function ($state, CrawlSettingService, launch) {
+            this.launch = launch;
+            this.launchFormFields = [{
+				key: 'name',
+				type: 'input',
+				templateOptions: {
+					label: "Instance Name",
+					required: true
+				}
+			}, {
+				key: 'base_url',
+				type: 'input',
+				templateOptions: {
+					label: "Base URL",
+					required: true
+				}
+			}, {
+				key: 'rule_route_pattern',
+				type: 'textarea',
+				templateOptions: {
+					label: "Rule Route pattern",
+					description: 'http://example.com/page/*',
+					required: true
+				}
+			}, {
+				key: 'content_matching_pattern',
+				type: 'textarea',
+				templateOptions: {
+					label: "Content Matching Pattern",
+					description: 'http://example.com/page/*',
+					required: true
+				}
+			}];
+
+            this.launchFormOptions = {};
+            this.submit = function () {
+              CrawlSettingService.upsert(this.setting).then(function () {
+                $state.go('^.list');
+              });
+            };
+          },
+          resolve: {
+            launch: function () {
+              return {};
+            }
+          }
+        })
         .state('app.crawlsettings.edit', {
           url: '/:id/edit',
           templateUrl: 'modules/crawlsettings/views/form.html',
