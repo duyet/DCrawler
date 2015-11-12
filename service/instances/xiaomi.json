@@ -1,0 +1,20 @@
+{
+	"product": "xiaomi-redmi-note-2",
+	"source": "tinhte.vn",
+
+	"model": "RawData",
+
+	"urls": [
+
+	],
+
+	"rules": {
+		"navigator": [
+			"#content > div > div > div.uix_contentFix > div > div > div:nth-child(6) > div.PageNav > nav > a"
+		],
+
+		"content": [
+			".messageInfo.primaryContent"
+		]
+	}
+}
