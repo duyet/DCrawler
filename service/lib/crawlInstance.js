@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var path = require('path');
+var fs = require('fs');
 var Crawler = require('./crawler');
 
 (function() {
@@ -10,7 +11,7 @@ var Crawler = require('./crawler');
 			skipDuplicates: true,
 		};
 
-		if (path.existsSync(options || '')) {
+		if (fs.existsSync(options || '')) {
 			this.options = require(options);
 		} else {
 			this.options = options || {};
@@ -36,4 +37,4 @@ var Crawler = require('./crawler');
 	};
 
 	module.exports = Instance;
-})call(this);
+}).call(this);
