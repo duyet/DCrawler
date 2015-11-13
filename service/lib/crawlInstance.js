@@ -65,6 +65,20 @@ var db = require('../config/db');
 	};
 
 	Instance.prototype.start = function() {
+		this.instanceConfig = this.options;
+
+		var that = this;
+		this.instanceConfig.callback = function(error, result, $) {
+			if (!result || !result.request) {
+				return;
+			}
+
+			var currentUrl = result.request.href || '';
+			// =====================================================
+			// Parse content
+			var posts = $(that.rules.content[0]);
+
+		}
 	};
 
 	module.exports = Instance;
