@@ -1,14 +1,28 @@
 'use strict';
 
-var _ = require('lodash');
+
 var path = require('path');
 var fs = require('fs');
+
+var _ = require('lodash');
+var mongoose = require('mongoose');
+
 var Crawler = require('./crawler');
+var db = require('../config/db');
 
 (function() {
 	var Instance = function(options) {
 		var defaults = {
 			skipDuplicates: true,
+
+			product: '',
+			model: 'RawData',
+			urls: [],
+			source: '',
+			rules: {
+				navigator: [],
+				content: []
+			}
 		};
 
 		if (fs.existsSync(options || '')) {
@@ -18,6 +32,11 @@ var Crawler = require('./crawler');
 		}
 
 		this.options = _.merge(defaults, this.options);
+
+		// Model
+		this.models = {};
+		this.models.queue = require('../models/queue');
+		this.models.contents = require('../models/contents');
 	};
 
 	Instance.prototype.setConfigFrom = function(configFile) {
@@ -31,6 +50,18 @@ var Crawler = require('./crawler');
 
 	Instance.prototype.getConfig = function() {
 		return this.options || {};
+	};
+
+	Instance.prototype.updateNavigatorRules = function(rule) {
+		if (!_.isArray(rule)) rule = [rule];
+
+		this.options.rules.navigator = rule;
+	};
+
+	Instance.prototype.updateContentRules = function(content) {
+		if (!_.isArray(content)) content = [content];
+
+		this.options.rules.content = content;
 	};
 
 	Instance.prototype.start = function() {
