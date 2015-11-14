@@ -5,6 +5,9 @@ var args = require('optimist').argv;
 
 var Instance = require('./lib/crawlInstance');
 
-var i = new Instance(args);
+if (args._ || args._.length == 1)
+	var i = new Instance(args._[0]);
+else 
+	var i = new Instance(args);
 
 console.log("Config: ", i.getConfig());

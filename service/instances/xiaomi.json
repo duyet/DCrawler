@@ -10,11 +10,21 @@
 
 	"rules": {
 		"navigator": [
-			"#content > div > div > div.uix_contentFix > div > div > div:nth-child(6) > div.PageNav > nav > a"
+			"#content > div > div > div.uix_contentFix > div > div > div:nth-child(6) > div.PageNav > nav > a",
+
 		],
 
-		"content": [
-			".messageInfo.primaryContent"
-		]
+		"container": [
+				"div.messageInfo.primaryContent"
+		],
+
+		"el": {
+			"content": [
+				"div.messageInfo.primaryContent > div.messageContent > article > blockquote"
+			],
+			"date": [
+				""
+			]
+		}
 	}
 }

@@ -11,6 +11,13 @@ var Crawler = require('./crawler');
 var db = require('../config/db');
 
 (function() {
+	var Rule = function(selector, type) {
+		this.selector = selector || [];
+		if (!_.isArray(this.selector)) this.selector = [this.selector];
+
+		this.type = type || 'text';
+	};
+
 	var Instance = function(options) {
 		var defaults = {
 			skipDuplicates: true,
@@ -21,17 +28,36 @@ var db = require('../config/db');
 			source: '',
 			rules: {
 				navigator: [],
-				content: []
+				container: [],
+				el: {
+					content: [],
+				}
 			}
 		};
 
-		if (fs.existsSync(options || '')) {
-			this.options = require(options);
-		} else {
+		this.rootDir = path.join(__dirname, '../../');
+
+		if (_.isString(options) && fs.existsSync(this.rootDir + options || '')) {
+			this.options = require(this.rootDir + options);
+		} else if (_.isString(options)) {
+			throw Error("Config instance is not found: " + this.rootDir + options);
+		}
+		else {
 			this.options = options || {};
 		}
 
 		this.options = _.merge(defaults, this.options);
+
+		// Make rules instance of Rule
+		var that = this;
+		if (this.options.rules) {
+			if (this.options.rules.el) {
+				_.each(this.options.rules.el, function(value, key) {
+					console.log(key, value);
+					if (value instanceof Rule === false) that.options.rules.el[key] = new Rule(value);
+				});
+			}
+		}
 
 		// Model
 		this.models = {};
@@ -64,6 +90,12 @@ var db = require('../config/db');
 		this.options.rules.content = content;
 	};
 
+	Instance.prototype.getContentXPath = function(rules) {
+		if (!_.isArray(rules)) rules = [rules];
+
+		return rules.join(',');
+	};
+
 	Instance.prototype.start = function() {
 		this.instanceConfig = this.options;
 
@@ -76,8 +108,12 @@ var db = require('../config/db');
 			var currentUrl = result.request.href || '';
 			// =====================================================
 			// Parse content
-			var posts = $(that.rules.content[0]);
-
+			var container = $(that.getContentXPath(that.rules.container));
+			if (container.length) {
+				container.each(function(index, block) {
+						
+				});
+			}
 		}
 	};
 
