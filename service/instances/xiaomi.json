@@ -11,9 +11,8 @@
 	],
 
 	"rules": {
-		"navigator": [
-			"#content > div > div > div.uix_contentFix > div > div > div:nth-child(6) > div.PageNav > nav > a",
-			""
+		"paging": [
+			".PageNav"
 		],
 
 		"container": [

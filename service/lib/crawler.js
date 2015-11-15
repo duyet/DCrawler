@@ -190,14 +190,14 @@ Crawler.prototype.queue = function queue (options) {
   if (options !== undefined && options.length == 1) {
     self._pushToQueue(
       _.isString(options[0]) ? {
-        uri: path.normalize(options[0])
+        uri: options[0]
       } : options[0]
     )
   // Did you get multiple requests? Queue the URLs.
   } else if (options !== undefined) {
     self.queue(
       _.isString(options[0]) ? {
-        uri: path.normalize(options[0])
+        uri: options[0]
       } : options[0]
     )
     self.queue(options.slice(1))
@@ -220,7 +220,6 @@ Crawler.prototype._pushToQueue = function _pushToQueue (options) {
   })
 
   // If duplicate skipping is enabled, avoid queueing entirely for URLs we already crawled
-
   if (options.skipDuplicates && self.cache[options.uri]) {
     return self.emit('pool:release', options)
   }

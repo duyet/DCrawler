@@ -30,7 +30,7 @@
       urls: [],
       source: '',
       rules: {
-        navigator: [],
+        paging: [],
         container: [],
         el: {
           content: [],
@@ -100,6 +100,13 @@
     return this.options.rules.container.join(',')
   }
 
+  Instance.prototype.getPagingSelector = function () {
+    if (!this.options.rules) return false
+    if (!this.options.rules.paging) return false
+
+    return this.options.rules.paging.join(',')
+  }
+
   Instance.prototype.getElRules = function (el) {
     if (!this.options.rules) return false
     if (!this.options.rules.el) return false
@@ -140,21 +147,46 @@
 
     var that = this
     this.instanceConfig.callback = function (error, result, $) {
+      var queueThat = this
+
       if (!result || !result.request) {
+        console.log('No result')
         return
       }
 
       var currentUrl = result.request.href || ''
+      var parser = url.parse(currentUrl)
+
+      // ====================================================
+      // Paging
+      var pagingWrap = $(that.getPagingSelector())
+      if (pagingWrap) {
+        var paging = $(pagingWrap).find('a')
+        if (paging.length) {
+          paging.each(function (index, a) {
+            var nextPage
+            if (a != null && (nextPage = $(a).attr('href')) != null) {
+              parser.pathname = nextPage
+              nextPage = url.format(parser)
+
+              that.c.queue(nextPage)
+            }
+          })
+        }
+      }
+
       // =====================================================
       // Parse content
       var container = $(that.getContainerRules())
       if (container.length) {
         container.each(function (index, block) {
           var collectData = {
-            parsedUrl: result.request.href,
+            parsedUrl: result.request.href || '',
             product: that.instanceConfig.product,
             source: that.instanceConfig.source,
-            content: that.getContentBySelector($(block), that.getElRules('content'), 'nocontent')
+            datetime: that.getContentBySelector($(block), that.getElRules('date'), ''),
+            content: that.getContentBySelector($(block), that.getElRules('content'), ''),
+            label: '', // default empty
           }
 
           console.log(collectData)
