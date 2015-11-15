@@ -1,16 +1,16 @@
 'use strict'
 
-var path = require('path')
-var fs = require('fs')
-var url = require('url')
-
-var _ = require('lodash')
-var mongoose = require('mongoose')
-
-var Crawler = require('./crawler')
-var db = require('../config/db')
-
 ;(function () {
+  var path = require('path')
+  var fs = require('fs')
+  var url = require('url')
+
+  var _ = require('lodash')
+  var mongoose = require('mongoose')
+
+  var Crawler = require('./crawler')
+  var db = require('../config/db')
+
   var Rule = function (selector, type) {
     this.selector = selector || []
     if (!_.isArray(this.selector)) this.selector = [this.selector]
@@ -124,8 +124,6 @@ var db = require('../config/db')
     var defaultReturn = defaultReturn || ''
     var selector = selectorRule instanceof Rule ? selectorRule.toString() : selectorRule
 
-    console.log('--> ', selector)
-
     if (!html) return defaultReturn
     if (!html.find(selector)) return defaultReturn
 
@@ -154,6 +152,8 @@ var db = require('../config/db')
         container.each(function (index, block) {
           var collectData = {
             parsedUrl: result.request.href,
+            product: that.instanceConfig.product,
+            source: that.instanceConfig.source,
             content: that.getContentBySelector($(block), that.getElRules('content'), 'nocontent')
           }
 
