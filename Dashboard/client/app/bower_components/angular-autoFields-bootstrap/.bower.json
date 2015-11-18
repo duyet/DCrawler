@@ -1,0 +1,29 @@
+{
+  "name": "angular-autoFields-bootstrap",
+  "version": "2.1.6",
+  "main": [
+    "autofields.min.js",
+    "autofields-bootstrap.min.js"
+  ],
+  "description": "Automatically generate fields from a schema object and bind them to an object",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:JustMaier/angular-autoFields-bootstrap.git"
+  },
+  "dependencies": {
+    "angular": "*",
+    "angular-ui-bootstrap": "*"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/JustMaier/angular-autoFields-bootstrap",
+  "_release": "2.1.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.1.6",
+    "commit": "5c49e24afa78f2d9103fd73ff57545a97a24b7ba"
+  },
+  "_source": "git://github.com/JustMaier/angular-autoFields-bootstrap.git",
+  "_target": "2.1.6",
+  "_originalSource": "angular-autoFields-bootstrap"
+}

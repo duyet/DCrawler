@@ -1,0 +1,14 @@
+{
+  "db": {
+    "url": "mongodb://localhost/dcrawler",
+    "name": "db",
+    "connector": "mongodb"
+  },
+  "eventserver": {
+    "name": "eventserver",
+    "connector": "rest",
+    "operations": [
+    	
+    ]
+  }
+}

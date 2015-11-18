@@ -1,0 +1,43 @@
+{
+  "name": "Forum-Crawler",
+  "version": "1.0.0",
+  "description": "Forum Crawler using Nodejs, power by Van-Duyet Le <lvduit08@gmail.com>",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:lvduit/forum-crawler.git"
+  },
+  "keywords": [
+    "crawler",
+    "nodejs",
+    "uit",
+    "lvduit"
+  ],
+  "author": "lvduit",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^2.1.2",
+    "cheerio": "^0.19.0",
+    "crawler": "^0.4.3",
+    "generic-pool": "^2.1.1",
+    "iconv": "^2.1.6",
+    "iconv-lite": "^0.4.7",
+    "jschardet": "^1.1.1",
+    "jsdom": "^4.0.5",
+    "lodash": "^3.5.0",
+    "mocha": "^2.2.1",
+    "mocha-testdata": "^1.1.0",
+    "moment": "^2.10.6",
+    "mongoose": "^4.0.1",
+    "request": "^2.54.0",
+    "sinon": "^1.14.1",
+    "string-template": "^0.2.1",
+    "unirest": "^0.4.2",
+    "url": "^0.10.3",
+    "valid-url": "^1.0.9"
+  }
+}

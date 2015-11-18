@@ -1,0 +1,47 @@
+{
+  "name": "Post",
+  "plural": "posts",
+  "base": "AppModel",
+  "properties": {
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "product": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "datetime": {
+      "type": "date"
+    },
+    "crawlDate": {
+      "type": "date"
+    },
+    "content": {
+      "type": "string",
+      "required": true,
+      "meta": {
+        "formType": "textarea"
+      }
+    },
+    "traincontent": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string",
+      "default": "none"
+    },
+    "taggedUser": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
