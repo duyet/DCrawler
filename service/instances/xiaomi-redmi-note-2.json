@@ -1,0 +1,33 @@
+{
+	"source": "tinhte.vn",
+	"category": "xiaomi",
+	"product": "xiaomi-redmi-note-2",
+	"model": "post",
+	
+	"urls": [
+		"https://tinhte.vn/threads/tren-tay-xiaomi-redmi-note-2-4-trieu-co-man-hinh-5-5-full-hd-chip-tam-nhan-sac-nhanh.2500606/",
+		"https://tinhte.vn/threads/danh-gia-camera-cua-xiaomi-redmi-note-2.2500927/",
+		"https://tinhte.vn/threads/review-danh-gia-chi-tiet-xiaomi-redmi-2.2439006/"
+	],
+
+	"keywords": [],
+
+	"rules": {
+		"paging": [
+			".PageNav"
+		],
+
+		"container": [
+				"div.messageInfo.primaryContent"
+		],
+
+		"el": {
+			"content": [
+				".messageContent > article > .messageText"
+			],
+			"date": [
+				".DateTime"
+			]
+		}
+	}
+}
