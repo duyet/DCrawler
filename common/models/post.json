@@ -30,7 +30,7 @@
       }
     },
     "traincontent": {
-      "type": "string",
+      "type": "string"
     },
     "label": {
       "type": "string",

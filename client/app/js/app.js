@@ -1,5 +1,5 @@
-(function () {
-  'use strict';
+;(function () {
+  'use strict'
   /**
    * @ngdoc overview
    * @name loopbackApp
@@ -40,65 +40,64 @@
       'ui.select',
       'com.module.core',
       'com.module.about',
-      //'com.module.browser',
-      'com.module.queues',
-      //'com.module.files',
-      //'com.module.notes',
-      //'com.module.pages',
+      // 'com.module.browser',
+      // 'com.module.queues',
+      // 'com.module.files',
+      // 'com.module.notes',
+      // 'com.module.pages',
       'com.module.posts',
       'com.module.tagged',
       'com.module.eventserver',
-      //'com.module.products',
-      //'com.module.sandbox',
+      // 'com.module.products',
+      // 'com.module.sandbox',
       'com.module.settings',
       'com.module.crawlsettings',
-      'com.module.testzone',
+      // 'com.module.testzone',
       'com.module.users'
     ])
     .run(function ($rootScope, $cookies, gettextCatalog) {
-
       $rootScope.locales = {
         'en': {
           lang: 'en',
           country: 'US',
           name: gettextCatalog.getString('English')
         }
-      };
+      }
 
-      var lang = $cookies.lang || navigator.language || navigator.userLanguage;
+      var lang = $cookies.lang || navigator.language || navigator.userLanguage
 
-      $rootScope.locale = $rootScope.locales[lang];
+      $rootScope.locale = $rootScope.locales[lang]
 
       if ($rootScope.locale === undefined) {
-        $rootScope.locale = $rootScope.locales[lang];
+        $rootScope.locale = $rootScope.locales[lang]
         if ($rootScope.locale === undefined) {
-          $rootScope.locale = $rootScope.locales['en'];
+          $rootScope.locale = $rootScope.locales['en']
         }
       }
 
-      gettextCatalog.setCurrentLanguage($rootScope.locale.lang);
+      gettextCatalog.setCurrentLanguage($rootScope.locale.lang)
 
     })
     .run(function (formlyConfig) {
       /*
        ngModelAttrs stuff
        */
-      var ngModelAttrs = {};
+      var ngModelAttrs = {}
 
       function camelize (string) {
         string = string.replace(/[\-_\s]+(.)?/g, function (match, chr) {
-          return chr ? chr.toUpperCase() : '';
-        });
+          return chr ? chr.toUpperCase() : ''
+        })
         // Ensure 1st char is always lowercase
         return string.replace(/^([A-Z])/, function (match, chr) {
-          return chr ? chr.toLowerCase() : '';
-        });
+          return chr ? chr.toLowerCase() : ''
+        })
       }
 
       /*
        timepicker
        */
-      ngModelAttrs = {};
+      ngModelAttrs = {}
 
       // attributes
       angular.forEach([
@@ -107,8 +106,8 @@
         'mousewheel',
         'arrowkeys'
       ], function (attr) {
-        ngModelAttrs[camelize(attr)] = {attribute: attr};
-      });
+        ngModelAttrs[camelize(attr)] = {attribute: attr}
+      })
 
       // bindings
       angular.forEach([
@@ -116,8 +115,8 @@
         'minute-step',
         'show-meridian'
       ], function (binding) {
-        ngModelAttrs[camelize(binding)] = {bound: binding};
-      });
+        ngModelAttrs[camelize(binding)] = {bound: binding}
+      })
 
       formlyConfig.setType({
         name: 'timepicker',
@@ -132,7 +131,7 @@
             timepickerOptions: {}
           }
         }
-      });
+      })
 
       formlyConfig.setType({
         name: 'datepicker',
@@ -147,7 +146,7 @@
             datepickerOptions: {}
           }
         }
-      });
-    });
+      })
+    })
 
-})();
+})()
