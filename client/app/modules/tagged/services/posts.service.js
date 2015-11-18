@@ -1,38 +1,44 @@
-(function () {
-  'use strict';
+;(function () {
+  'use strict'
   angular
     .module('com.module.tagged')
-    .service('TaggedpostsService', function (CoreService, Taggedpost, gettextCatalog) {
+    .service('TaggedpostsService', function (CoreService, Post, gettextCatalog) {
       this.getTaggedposts = function () {
-        return Taggedpost.find({
+        return Post.find({
           filter: {
-            order: 'created DESC'
+            order: 'created DESC',
+            where: {
+              and: [
+                { label: { neq: 'none'}},
+                { label: { neq: ''}}
+              ]
+            }
           }
-        }).$promise;
-      };
+        }).$promise
+      }
 
       this.getTaggedpost = function (id) {
-        return Taggedpost.findById({
+        return Post.findById({
           id: id
-        }).$promise;
-      };
+        }).$promise
+      }
 
       this.upsertTaggedpost = function (post) {
-        return Taggedpost.upsert(post).$promise
+        return Post.upsert(post).$promise
           .then(function () {
             CoreService.toastSuccess(
               gettextCatalog.getString('Taggedpost saved'),
               gettextCatalog.getString('Your post is safe with us!')
-            );
+            )
           })
           .catch(function (err) {
             CoreService.toastSuccess(
               gettextCatalog.getString('Error saving post '),
               gettextCatalog.getString('This post could no be saved: ') + err
-            );
+            )
           }
-        );
-      };
+        )
+      }
 
       this.deleteTaggedpost = function (id, successCb, cancelCb) {
         CoreService.confirm(
@@ -42,20 +48,20 @@
             Taggedpost.deleteById({id: id}, function () {
               CoreService.toastSuccess(
                 gettextCatalog.getString('Taggedpost deleted'),
-                gettextCatalog.getString('Your post is deleted!'));
-              successCb();
+                gettextCatalog.getString('Your post is deleted!'))
+              successCb()
             }, function (err) {
               CoreService.toastError(
                 gettextCatalog.getString('Error deleting post'),
-                gettextCatalog.getString('Your post is not deleted! ') + err);
-              cancelCb();
-            });
+                gettextCatalog.getString('Your post is not deleted! ') + err)
+              cancelCb()
+            })
           },
           function () {
-            cancelCb();
+            cancelCb()
           }
-        );
-      };
+        )
+      }
 
       this.getFormFields = function () {
         return [
@@ -82,9 +88,9 @@
               label: gettextCatalog.getString('Image')
             }
           }
-        ];
-      };
+        ]
+      }
 
-    });
+    })
 
-})();
+})()

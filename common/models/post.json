@@ -29,6 +29,9 @@
         "formType": "textarea"
       }
     },
+    "traincontent": {
+      "type": "string",
+    },
     "label": {
       "type": "string",
       "default": "none"

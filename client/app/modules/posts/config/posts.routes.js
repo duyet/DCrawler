@@ -13,12 +13,17 @@
           url: '',
           templateUrl: 'modules/posts/views/list.html',
           controllerAs: 'ctrl',
-          controller: function (posts, PostsService) {
+          controller: function (posts, PostsService, User) {
+            this.currentUser = User.getCurrent()
             this.posts = posts
             this.autohidepost = true
 
+            var self = this
             this.setLabel = function (post, label) {
               post.label = label
+              post.traincontent = this.getCleanContent(post.content)
+              post.taggedUser = self.currentUser._id
+
               console.log('Assign ' + label + ' for ', post)
               PostsService.setLabel(post)
               if (this.autohidepost == true) {
@@ -33,11 +38,14 @@
                 if (!m) return ''
                 return "<span class='blur'>" + m + '</span>'
               })
-
-              var t2 = c.replace(regex, '')
-
               return t
             }
+
+            this.getCleanContent = function (c) {
+              var regex = /([a-zA-Z0-9]+\sđã\snói\:\s(.*)(Bấm để mở rộng...))/g
+              return c.replace(regex, '')
+            }
+
           },
           resolve: {
             posts: [
