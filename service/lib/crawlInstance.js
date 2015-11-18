@@ -7,6 +7,7 @@
 
   var _ = require('lodash')
   var mongoose = require('mongoose')
+  var moment = require('moment')
 
   var Crawler = require('./crawler')
   var db = require('../config/db')
@@ -138,7 +139,8 @@
       html = this.removeQuoteFromDom(html)
     }
 
-    return this.preprocessTextContent(html.find(selector).text() || defaultReturn)
+    var selectedContent = html.find(selector)
+    return this.preprocessTextContent((selectedContent || []).text() || defaultReturn)
   }
 
   Instance.prototype.start = function () {
@@ -181,14 +183,17 @@
       var container = $(that.getContainerRules())
       if (container.length) {
         container.each(function (index, block) {
+          var datetimeText = that.getContentBySelector($(block), that.getElRules('date'))
+          var dateTimeValue = moment(datetimeText, 'DD/MM/YY')
+
           var collectData = {
             url: result.request.href || '',
             source: that.instanceConfig.source,
             category: that.instanceConfig.category,
             product: that.instanceConfig.product,
             model: that.instanceConfig.model,
-            datetime: that.getContentBySelector($(block), that.getElRules('date'), ''),
-            crawlDate: new Date(),
+            datetime: dateTimeValue.toISOString(),
+            crawlDate: moment().toISOString(),
             content: that.getContentBySelector($(block), that.getElRules('content'), ''),
             label: '', // default empty
           }
