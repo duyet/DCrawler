@@ -134,7 +134,27 @@ exec_cmd 'apt-get update'
 print_status 'Run `apt-get install nodejs` (as root) to install Node.js 4.x LTS Argon and npm'
 exec_cmd 'sudo apt-get install nodejs'
 
+print_status 'Installing the MongoDB'
+exec_cmd 'sudo apt-get install mongodb'
 
 DASHBOARD_PATH=$(pwd ./Dashboard)
-echo -e "\nGo to Dashboard module folder at $DASHBOARD_PATH"
-cd $DASHBOARD_PATH
+print_status "Go to Dashboard module folder at $DASHBOARD_PATH"
+exec_cmd 'cd $DASHBOARD_PATH'
+
+print_status "Install Bower and  Grunt-cli"
+exec_cmd 'sudo npm install -g bower grunt-cli'
+
+print_status "Install the NPM Package"
+exec_cmd 'npm install'
+
+print_status "Install the Bower"
+exec_cmd 'bower install'
+
+print_status "Leave folder"
+exec_cmd 'cd ..'
+
+CRAWLER_PATH=$(pwd ./Crawler)
+print_status "Go to Crawler module folder at $CRAWLER_PATH"
+
+print_status "Leave folder"
+cd ..
