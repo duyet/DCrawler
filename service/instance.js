@@ -5,11 +5,17 @@ var args = require('optimist').argv
 
 var Instance = require('./lib/crawlInstance')
 
+var instance = {}
 if (args._ || args._.length == 1)
-  var i = new Instance(args._[0])
+  instance.file = args._[0]
 else
-  var i = new Instance(args)
+  instance = args
+
+instance.resultCallback = function (data) {
+  console.log(data.toObject())
+}
+
+var i = new Instance(instance)
 
 console.log('Config: ', i.getConfig())
-console.log('=======================================')
 i.start()

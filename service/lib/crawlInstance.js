@@ -11,24 +11,22 @@
   var Crawler = require('./crawler')
   var db = require('../config/db')
 
-  var Rule = function (selector, type) {
-    this.selector = selector || []
-    if (!_.isArray(this.selector)) this.selector = [this.selector]
-
-    this.type = type || 'text'
-    this.toString = function () {
-      return this.selector.join(',')
-    }
-  }
+  var Rule = require('./rule')
+  var DataRow = require('./datarow')
 
   var Instance = function (options) {
     var defaults = {
       skipDuplicates: true,
+      removeSpace: true,
+      removeNewLine: true,
+      removeCommentQuote: true,
 
+      source: '',
+      category: 'device',
       product: '',
       model: 'RawData',
       urls: [],
-      source: '',
+
       rules: {
         paging: [],
         container: [],
@@ -41,15 +39,15 @@
 
     this.rootDir = path.join(__dirname, '../../')
 
-    if (_.isString(options) && fs.existsSync(this.rootDir + options || '')) {
-      this.options = require(this.rootDir + options)
-    } else if (_.isString(options)) {
-      throw Error('Config instance is not found: ' + this.rootDir + options)
-    } else {
-      this.options = options || {}
+    this.options = {}
+    if (options.file && _.isString(options.file) && fs.existsSync(this.rootDir + options.file || '')) {
+      this.options = require(this.rootDir + options.file)
+    } else if (options.file && _.isString(options.file)) {
+      throw Error('Config instance is not found: ' + this.rootDir + options.file)
     }
 
-    this.options = _.merge(defaults, this.options)
+    this.options = _.merge(options, this.options || {})
+    this.options = _.merge(defaults, this.options || {})
 
     // Make rules instance of Rule
     var that = this
@@ -122,7 +120,9 @@
 
   Instance.prototype.removeQuoteFromDom = function (dom) {
     dom = dom || false
-    if (dom) dom.remove('.bbCodeQuote')
+    if (dom) {
+      dom = dom.remove('.bbCodeQuote')
+    }
 
     return dom
   }
@@ -134,8 +134,9 @@
     if (!html) return defaultReturn
     if (!html.find(selector)) return defaultReturn
 
-    // if (this.removeQuote) 
-    html = this.removeQuoteFromDom(html)
+    if (this.options.removeCommentQuote) {
+      html = this.removeQuoteFromDom(html)
+    }
 
     return this.preprocessTextContent(html.find(selector).text() || defaultReturn)
   }
@@ -181,15 +182,27 @@
       if (container.length) {
         container.each(function (index, block) {
           var collectData = {
-            parsedUrl: result.request.href || '',
-            product: that.instanceConfig.product,
+            url: result.request.href || '',
             source: that.instanceConfig.source,
+            category: that.instanceConfig.category,
+            product: that.instanceConfig.product,
+            model: that.instanceConfig.model,
             datetime: that.getContentBySelector($(block), that.getElRules('date'), ''),
+            crawlDate: new Date(),
             content: that.getContentBySelector($(block), that.getElRules('content'), ''),
             label: '', // default empty
           }
 
-          console.log(collectData)
+          if (that.instanceConfig.removeSpace) {
+            collectData.content = collectData.content.replace(/\s+/g, ' ')
+          }
+          if (that.instanceConfig.removeNewLine) {
+            collectData.content = collectData.content.replace(/\n/g, '. ')
+          }
+
+          if (that.instanceConfig.resultCallback && collectData.content.length) {
+            that.instanceConfig.resultCallback(new DataRow(collectData))
+          }
         })
       }
     }
