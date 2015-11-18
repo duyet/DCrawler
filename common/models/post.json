@@ -31,7 +31,6 @@
     },
     "label": {
       "type": "string",
-      "required": true,
       "default": "none"
     },
     "taggedUser": {
