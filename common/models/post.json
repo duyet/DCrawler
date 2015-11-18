@@ -16,7 +16,7 @@
     "source": {
       "type": "string"
     },
-    "commentDate": {
+    "datetime": {
       "type": "date"
     },
     "crawlDate": {
