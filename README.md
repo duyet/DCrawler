@@ -18,6 +18,19 @@ sudo apt-get install -y curl
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install -y nodejs build-essential mongodb git 
 npm install -g grunt-cli bower strongloop pm2
+
+cd ~
+git clone https://github.com/duyetdev/reviews-mining
+cd reviews-mining
+
+export REVIEW_MINING_PATH=$(pwd)
+
+## Install Strongloop server and Dashboard server 
+cd Dashboard; npm install; bower install --allow-root
+pm2 start $(which grunt) --name "dashboard-server" -- serve 
+
+## Install Crawler deps
+cd ../Crawler; npm install
 ```
 
 Contact 
