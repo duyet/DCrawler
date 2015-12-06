@@ -26,11 +26,11 @@ cd reviews-mining
 export REVIEW_MINING_PATH=$(pwd)
 
 ## Install Strongloop server and Dashboard server 
-cd Dashboard; npm install; bower install --allow-root
+cd $REVIEW_MINING_PATH/Dashboard; npm install; bower install --allow-root
 pm2 start $(which grunt) --name "dashboard-server" -- serve 
 
 ## Install Crawler deps
-cd ../Crawler; npm install
+cd $REVIEW_MINING_PATH/Crawler; npm install
 ```
 
 Contact 
