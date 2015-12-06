@@ -38,7 +38,7 @@
       }
     }
 
-    this.rootDir = path.join(__dirname, '../../')
+    this.rootDir = path.join(__dirname, '../')
 
     this.options = {}
     if (options.file && _.isString(options.file) && fs.existsSync(this.rootDir + options.file || '')) {
