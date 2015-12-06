@@ -1,5 +1,6 @@
-DCrawler
-=============
+# Reviews Mining ín Nodejs
+
+## DCrawler
 
 DCrawler is Nodejs Crawler, multi-module-spider, jQuery query page content, multi thread support.
 
@@ -10,6 +11,14 @@ Version: 0.1.2
 Testing in: 
 * Nodejs v4.2.1
 * NPM v2.14.7
+
+# Install 
+```sh
+sudo apt-get install -y curl
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+sudo apt-get install -y nodejs build-essential mongodb git 
+npm install -g grunt-cli bower
+```
 
 Contact 
 =============
