@@ -17,7 +17,7 @@ Testing in:
 sudo apt-get install -y curl
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install -y nodejs build-essential mongodb git 
-npm install -g grunt-cli bower
+npm install -g grunt-cli bower strongloop
 ```
 
 Contact 
