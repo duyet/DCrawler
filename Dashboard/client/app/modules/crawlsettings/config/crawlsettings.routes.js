@@ -1,5 +1,5 @@
-(function () {
-  'use strict';
+;(function () {
+  'use strict'
   angular
     .module('com.module.crawlsettings')
     .config(function ($stateProvider) {
@@ -9,8 +9,8 @@
           url: '/crawlsettings',
           templateUrl: 'modules/crawlsettings/views/main.html',
           controllerAs: 'ctrl',
-          controller: function($rootScope) {
-            this.box = $rootScope.dashboardBox;
+          controller: function ($rootScope) {
+            this.box = $rootScope.dashboardBox
           }
         })
         .state('app.crawlsettings.list', {
@@ -18,11 +18,11 @@
           templateUrl: 'modules/crawlsettings/views/list.html',
           controllerAs: 'ctrl',
           controller: function (crawlsettings) {
-            this.crawlsettings = crawlsettings;
+            this.crawlsettings = crawlsettings
           },
           resolve: {
             crawlsettings: function (CrawlSettingService) {
-              return CrawlSettingService.find();
+              return CrawlSettingService.find()
             }
           }
         })
@@ -31,18 +31,48 @@
           templateUrl: 'modules/crawlsettings/views/form.html',
           controllerAs: 'ctrl',
           controller: function ($state, CrawlSettingService, setting) {
-            this.setting = setting;
-            this.formFields = CrawlSettingService.getFormFields();
-            this.formOptions = {};
+            this.setting = setting
+            this.formFields = [{
+              key: 'name',
+              type: 'input',
+              templateOptions: {
+                label: 'Instance Name',
+                required: true
+              }
+            }, {
+              key: 'base_url',
+              type: 'input',
+              templateOptions: {
+                label: 'Base URL',
+                required: true
+              }
+            }, {
+              key: 'rule_route_pattern',
+              type: 'textarea',
+              templateOptions: {
+                label: 'Rule Route pattern',
+                description: 'http://example.com/page/*',
+                required: true
+              }
+            }, {
+              key: 'content_matching_pattern',
+              type: 'textarea',
+              templateOptions: {
+                label: 'Content Matching Pattern',
+                description: 'http://example.com/page/*',
+                required: true
+              }
+            }]
+            this.formOptions = {}
             this.submit = function () {
               CrawlSettingService.upsert(this.setting).then(function () {
-                $state.go('^.list');
-              });
-            };
+                $state.go('^.list')
+              })
+            }
           },
           resolve: {
             setting: function () {
-              return {};
+              return {}
             }
           }
         })
@@ -51,49 +81,49 @@
           templateUrl: 'modules/crawlsettings/views/launch.html',
           controllerAs: 'ctrl',
           controller: function ($state, CrawlSettingService, launch) {
-            this.launch = launch;
+            this.launch = launch
             this.launchFormFields = [{
-				key: 'name',
-				type: 'input',
-				templateOptions: {
-					label: "Instance Name",
-					required: true
-				}
-			}, {
-				key: 'base_url',
-				type: 'input',
-				templateOptions: {
-					label: "Base URL",
-					required: true
-				}
-			}, {
-				key: 'rule_route_pattern',
-				type: 'textarea',
-				templateOptions: {
-					label: "Rule Route pattern",
-					description: 'http://example.com/page/*',
-					required: true
-				}
-			}, {
-				key: 'content_matching_pattern',
-				type: 'textarea',
-				templateOptions: {
-					label: "Content Matching Pattern",
-					description: 'http://example.com/page/*',
-					required: true
-				}
-			}];
+              key: 'name',
+              type: 'input',
+              templateOptions: {
+                label: 'Instance Name',
+                required: true
+              }
+            }, {
+              key: 'base_url',
+              type: 'input',
+              templateOptions: {
+                label: 'Base URL',
+                required: true
+              }
+            }, {
+              key: 'rule_route_pattern',
+              type: 'textarea',
+              templateOptions: {
+                label: 'Rule Route pattern',
+                description: 'http://example.com/page/*',
+                required: true
+              }
+            }, {
+              key: 'content_matching_pattern',
+              type: 'textarea',
+              templateOptions: {
+                label: 'Content Matching Pattern',
+                description: 'http://example.com/page/*',
+                required: true
+              }
+            }]
 
-            this.launchFormOptions = {};
+            this.launchFormOptions = {}
             this.submit = function () {
               CrawlSettingService.upsert(this.setting).then(function () {
-                $state.go('^.list');
-              });
-            };
+                $state.go('^.list')
+              })
+            }
           },
           resolve: {
             launch: function () {
-              return {};
+              return {}
             }
           }
         })
@@ -102,18 +132,18 @@
           templateUrl: 'modules/crawlsettings/views/form.html',
           controllerAs: 'ctrl',
           controller: function ($state, CrawlSettingService, crawlsettings) {
-            this.crawlsettings = crawlsettings;
-            this.formFields = CrawlSettingService.getFormFields();
-            this.formOptions = {};
+            this.crawlsettings = crawlsettings
+            this.formFields = CrawlSettingService.getFormFields()
+            this.formOptions = {}
             this.submit = function () {
               CrawlSettingService.upsert(this.crawlsettings).then(function () {
-                $state.go('^.list');
-              });
-            };
+                $state.go('^.list')
+              })
+            }
           },
           resolve: {
             crawlsettings: function ($stateParams, CrawlSettingService) {
-              return CrawlSettingService.findById($stateParams.id);
+              return CrawlSettingService.findById($stateParams.id)
             }
           }
         })
@@ -122,11 +152,11 @@
           templateUrl: 'modules/crawlsettings/views/view.html',
           controllerAs: 'ctrl',
           controller: function (crawlsettings) {
-            this.crawlsettings = crawlsettings;
+            this.crawlsettings = crawlsettings
           },
           resolve: {
             crawlsettings: function ($stateParams, CrawlSettingService) {
-              return CrawlSettingService.findById($stateParams.id);
+              return CrawlSettingService.findById($stateParams.id)
             }
           }
         })
@@ -136,12 +166,12 @@
           controllerAs: 'ctrl',
           controller: function ($stateParams, $state, CrawlSettingService) {
             CrawlSettingService.delete($stateParams.id, function () {
-              $state.go('^.list');
+              $state.go('^.list')
             }, function () {
-              $state.go('^.list');
-            });
+              $state.go('^.list')
+            })
           }
-        });
-    });
+        })
+    })
 
-})();
+})()

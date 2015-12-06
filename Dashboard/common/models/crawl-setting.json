@@ -7,10 +7,21 @@
   },
   "properties": {
     "key": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "value": {
+      "type": "any"
+    }, 
+    "name": {
+      "type": "any"
+    }, 
+    "base_url": {
+      "type": "any"
+    }, 
+    "rule_route_pattern": {
+      "type": "any"
+    }, 
+    "content_matching_pattern": {
       "type": "any"
     }
   },

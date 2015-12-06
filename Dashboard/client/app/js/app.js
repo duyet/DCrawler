@@ -40,6 +40,7 @@
       'ui.select',
       'com.module.core',
       'com.module.about',
+      'com.module.reports',
       // 'com.module.browser',
       // 'com.module.queues',
       // 'com.module.files',
