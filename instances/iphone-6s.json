@@ -1,0 +1,30 @@
+{
+	"source": "tinhte.vn",
+	"category": "iphone",
+	"product": "iphone-6s",
+	"model": "posts",
+
+	"urls": [
+	],
+
+	"keywords": ["iphone+6s"],
+
+	"rules": {
+		"paging": [
+			".PageNav"
+		],
+
+		"container": [
+				"div.messageInfo.primaryContent"
+		],
+
+		"el": {
+			"content": [
+				".messageContent > article > .messageText"
+			],
+			"date": [
+				".DateTime"
+			]
+		}
+	}
+}

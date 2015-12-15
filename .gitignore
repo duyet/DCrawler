@@ -14,7 +14,7 @@
 .project
 .strong-pm
 coverage
-Crawler/node_modules
-Dashboard/node_modules
+node_modules
 npm-debug.log
 *~
+

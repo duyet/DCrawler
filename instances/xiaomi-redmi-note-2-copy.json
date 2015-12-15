@@ -1,0 +1,34 @@
+{
+	"source": "tinhte.vn",
+	"category": "xiaomi",
+	"product": "xiaomi-redmi-note-2",
+	"model": "posts",
+	
+	"urls": [
+		"https://tinhte.vn"
+	],
+
+	"keywords": [],
+
+	"rules": {
+		"paging": [
+			".PageNav"
+		],
+
+		"container": [
+				"div.messageInfo.primaryContent"
+		],
+
+		"el": {
+			"content": [
+				".messageContent > article > .messageText"
+			],
+			"Post-date": [
+				".DateTime"
+			],
+			"link": [],
+			"note": [],
+			"Sub-category": []
+		}
+	}
+}
