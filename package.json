@@ -1,7 +1,7 @@
 {
-  "name": "Forum-Crawler",
+  "name": "DCrawler",
   "version": "1.0.0",
-  "description": "Forum Crawler using Nodejs, power by Van-Duyet Le <lvduit08@gmail.com>",
+  "description": "Crawler using Nodejs, power by Van-Duyet Le <lvduit08@gmail.com>",
   "main": "index.js",
   "scripts": {
     "test": "test.js",
@@ -9,15 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:lvduit/forum-crawler.git"
+    "url": "git@github.com:duyetdev/DCrawler.git"
   },
   "keywords": [
     "crawler",
     "nodejs",
     "uit",
-    "lvduit"
+    "lvduit",
+    "duyetdev"
   ],
-  "author": "lvduit",
+  "author": "duyetdev",
   "license": "ISC",
   "dependencies": {
     "chai": "^2.1.2",
