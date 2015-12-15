@@ -5,7 +5,7 @@ DCrawler is Nodejs Crawler, multi-module-spider, jQuery query page content, mult
 
 Version: 0.0.2
 
-Contact 
+Contact
 =============
 
 Van-Duyet Le (me[at]duyetdev.com)
@@ -41,13 +41,14 @@ Install Node modules
 
 ### Config your spider
 
-Config your spider, the sample spider is located at `modules/tinhte.js`
+**Update: 0.0.3:** Config your spider, the sample spider is located at `instances/xiaomi-4i.json`
 
 ### To run
+**Update: 0.0.3:**
 
-    node index
+    node instance instances/xiaomi-4i.json
 
-For multi thread base on number of your CPU Core.
+For multi thread base on number of your CPU Core (Not test in v0.0.3).
 
     node multithread
 
