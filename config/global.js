@@ -4,7 +4,7 @@ module.exports = {
 	name: 'FCrawler',
 
 	// The folder of modules spider
-	modulesDir: 'modules',
+	instancesDir: 'instances',
 
 	// Skip HTML
 	skipHtml: true,

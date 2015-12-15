@@ -1,0 +1,38 @@
+{
+	"source": "muaban.net",
+	"category": "muaban.net",
+	"product": "muaban.net",
+	"model": "posts",
+
+	"baseUrl": "https://muaban.net",
+
+	"urls": [
+		"https://muaban.net"
+	],
+
+	"keywords": [],
+	"rules": {
+		"paging": [
+			".home-location ul > li",
+			".pagination",
+			".mbn-box-right .mbn-content",
+			".ct-classified-same > ul li span.content > span.title > span.subject",
+			".mbn-title-link .mbn-box-main-categoty-link .mbn-box-main-category-list-link ul li"
+		],
+
+		"container": [
+				"#dvContent"
+		],
+
+		"el": {
+			"content": [
+				".ct-body"
+			],
+			"date": [
+				".cl-price-sm.clearfix > span:nth-child(2)"
+			],
+			"price": [".ct-price .price-value"],
+			"title": [".cl-title > h1"]
+		}
+	}
+}

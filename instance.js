@@ -6,10 +6,6 @@ var unirest = require('unirest')
 
 var Instance = require('./lib/crawlInstance')
 
-var config = {
-  strongloop: 'http://localhost:3000/api'
-}
-
 var instance = {}
 if (args._ || args._.length == 1)
   instance.file = args._[0]
@@ -17,15 +13,7 @@ else
   instance = args
 
 instance.resultCallback = function (data) {
-  if (data) {
-    unirest
-      .put(config.strongloop + '/' + data.get('model'))
-      .header('Accept', 'application/json')
-      .send(data.toJson())
-      .end(function (response) {
-        console.log(response.body)
-      })
-  }
+ console.log("==>", data.toObject());
 }
 
 var i = new Instance(instance)
