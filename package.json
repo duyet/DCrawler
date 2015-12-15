@@ -4,7 +4,7 @@
   "description": "Crawler using Nodejs, power by Van-Duyet Le <lvduit08@gmail.com>",
   "main": "index.js",
   "scripts": {
-    "test": "test.js",
+    "test": "echo \"Test is not avaiable!\"",
     "start": "node index.js"
   },
   "repository": {
