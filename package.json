@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Test is not avaiable!\"",
-    "start": "node index.js"
+    "start": "node index.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,8 @@
     "string-template": "^0.2.1",
     "unirest": "^0.4.2",
     "url": "^0.10.3",
-    "valid-url": "^1.0.9"
-  }
+    "valid-url": "^1.0.9",
+    "snyk": "^1.317.0"
+  },
+  "snyk": true
 }
