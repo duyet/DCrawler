@@ -33,7 +33,7 @@
     "mocha": "^2.2.1",
     "mocha-testdata": "^1.1.0",
     "moment": "^2.10.6",
-    "mongoose": "^4.0.1",
+    "mongoose": "^5.13.9",
     "request": "^2.54.0",
     "sinon": "^1.14.1",
     "string-template": "^0.2.1",
